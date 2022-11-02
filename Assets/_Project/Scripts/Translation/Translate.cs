@@ -17,7 +17,7 @@ namespace GithubGameOff2022.Translation
         {
             foreach (var lang in _languages)
             {
-                _translationData.Add(lang, JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.Load<TextAsset>(lang).text));
+                _translationData.Add(lang, JsonConvert.DeserializeObject<Dictionary<string, string>>(Resources.Load<TextAsset>($"Translation/{lang}").text));
             }
         }
 
