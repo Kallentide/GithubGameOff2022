@@ -20,6 +20,8 @@ namespace GithubGameOff2022.NPC
 
         private IEnumerator SpawnMonsters()
         {
+            // TODO: Need to be replaced by a "Ready" button or smth
+            yield return new WaitForSeconds(2f);
             while (true)
             {
                 Instantiate(_info.PossibleSpawns[0], transform);
