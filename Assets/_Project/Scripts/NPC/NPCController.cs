@@ -33,11 +33,14 @@ namespace GithubGameOff2022.NPC
 
         private void Update()
         {
-            _timer -= Time.deltaTime;
-            if (!IsLeaving && _timer <= 0f)
+            if (!IsLeaving)
             {
-                IsLeaving = true;
-                _agent.SetDestination(_exitPoint);
+                _timer -= Time.deltaTime;
+                if (_timer <= 0f)
+                {
+                    IsLeaving = true;
+                    _agent.SetDestination(_exitPoint);
+                }
             }
         }
     }
