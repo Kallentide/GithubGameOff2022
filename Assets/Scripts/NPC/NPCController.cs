@@ -9,6 +9,7 @@ namespace GithubGameOff2022.NPC
 
         private void Awake()
         {
+            _agent = GetComponent<NavMeshAgent>();
             _agent.SetDestination(Vector3.zero);
         }
     }
