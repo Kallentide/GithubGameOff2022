@@ -31,5 +31,17 @@ namespace GithubGameOff2022.NPC
                 }
             }
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Monster"))
+            {
+                var npc = other.GetComponent<NPCController>();
+                if (npc.IsLeaving)
+                {
+                    Destroy(npc.gameObject);
+                }
+            }
+        }
     }
 }

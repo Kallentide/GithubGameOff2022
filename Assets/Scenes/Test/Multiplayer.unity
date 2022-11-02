@@ -532,6 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 942631747}
   - component: {fileID: 942631748}
+  - component: {fileID: 942631749}
   m_Layer: 0
   m_Name: NPCSpawn
   m_TagString: Untagged
@@ -569,6 +570,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: 8374254abbd180d428ee20194455804a, type: 2}
   _text: {fileID: 724723873}
+--- !u!65 &942631749
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942631746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5435284, z: 1}
+  m_Center: {x: 0, y: -0.27176446, z: 0}
 --- !u!1 &1020219660
 GameObject:
   m_ObjectHideFlags: 0
