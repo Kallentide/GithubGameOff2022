@@ -1,3 +1,6 @@
+/Assets/DOTween/*
+!/Assets/DOTween/README.md
+
 /[Aa]ssets/TextMesh Pro/
 /[Aa]ssets/TextMesh Pro.meta
 
