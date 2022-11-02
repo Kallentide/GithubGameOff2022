@@ -13,15 +13,16 @@ namespace GithubGameOff2022.NPC
         [SerializeField]
         private TMP_Text _text;
 
-        private void Awake()
+        private void Start()
         {
-            StartCoroutine(SpawnMonsters());
+            TimeManager.Instance.OnReady.AddListener(new(() =>
+            {
+                StartCoroutine(SpawnMonsters());
+            }));
         }
 
         private IEnumerator SpawnMonsters()
         {
-            // TODO: Need to be replaced by a "Ready" button or smth
-            yield return new WaitForSeconds(2f);
             while (true)
             {
                 Instantiate(_info.PossibleSpawns[0], transform);
