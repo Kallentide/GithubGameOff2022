@@ -1,4 +1,6 @@
+using GithubGameOff2022.Prop;
 using GithubGameOff2022.SO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,13 +11,36 @@ namespace GithubGameOff2022.Player
         [SerializeField]
         private PlayerInfo _info;
 
+        [SerializeField]
+        private GameObject _rotTarget;
+
         private CharacterController _cc;
         private Vector3 _mov;
         private float _verSpeed;
 
+        private TMP_Text _indicatorText;
+        private IInteractible _interactionTarget;
+        public bool IsReady { set; get; } // Used at the start of a day, game only starts when all people are ready
+
         private void Awake()
         {
             _cc = GetComponent<CharacterController>();
+            _indicatorText = GetComponentInChildren<TMP_Text>();
+
+            var triggerZone = GetComponentInChildren<TriggerDetector>();
+            triggerZone.TriggerEnterEvent.AddListener(new((coll) =>
+            {
+                var target = coll.GetComponent<IInteractible>();
+                if (target != null && target.CanInterract(this))
+                {
+                    _indicatorText.text = target.GetInteractionName(this);
+                    _interactionTarget = target;
+                }
+            }));
+            triggerZone.TriggerExitEvent.AddListener(new((coll) => {
+                _interactionTarget = null;
+                _indicatorText.text = string.Empty;
+            }));
         }
 
         private void FixedUpdate()
@@ -49,6 +74,26 @@ namespace GithubGameOff2022.Player
         public void OnMovement(InputAction.CallbackContext value)
         {
             _mov = value.ReadValue<Vector2>().normalized;
+            if (_mov.magnitude != 0f)
+            {
+                _rotTarget.transform.rotation = Quaternion.LookRotation(new Vector3(_mov.x, 0f, _mov.y), Vector3.up);
+            }
+        }
+
+        public void OnAction(InputAction.CallbackContext value)
+        {
+            if (value.performed && _interactionTarget != null)
+            {
+                if (_interactionTarget.CanInterract(this)) // Just to be sure a player didn't snipe 
+                {
+                    _interactionTarget.DoAction(this);
+                    if (!_interactionTarget.CanInterract(this)) // Can we interact with the object again?
+                    {
+                        _interactionTarget = null;
+                        _indicatorText.text = string.Empty;
+                    }
+                }
+            }
         }
     }
 }
