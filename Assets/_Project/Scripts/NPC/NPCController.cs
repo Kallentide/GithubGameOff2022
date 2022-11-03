@@ -9,8 +9,8 @@ namespace GithubGameOff2022.NPC
 {
     public class NPCController : MonoBehaviour
     {
-        [SerializeField]
-        private MonsterInfo _monsterSO;
+        [SerializeField] private MonsterInfo _monsterSO;
+        [SerializeField] private Vector3 _waitPoint;
 
         private NavMeshAgent _agent;
 
@@ -40,13 +40,10 @@ namespace GithubGameOff2022.NPC
         {
             _agent = GetComponent<NavMeshAgent>();
             _needs = _monsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
-            _timer = 9f;
+            _timer = 25f;
             _exitPoint = transform.position;
 
-            // We get a random chair and say its ours, then move to it
-            _targetChair = MainRoomManager.Instance.FreeChair;
-            _targetChair.IsBusy = true;
-            _agent.SetDestination(_targetChair.transform.position);
+            _agent.SetDestination(_waitPoint);
         }
 
         private void Update()

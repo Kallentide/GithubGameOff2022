@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monsterSO: {fileID: 11400000, guid: 394b5463c21cb2049b623cb6370ae982, type: 2}
+  _waitPoint: {x: -2, y: 0, z: 3}
 --- !u!54 &-2656102080991800211
 Rigidbody:
   m_ObjectHideFlags: 0
