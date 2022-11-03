@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GithubGameOff2022.Prop;
+using UnityEngine;
 using UnityEngine.AI;
 using GithubGameOff2022.SO;
 using System.Collections.Generic;
@@ -47,6 +48,8 @@ namespace GithubGameOff2022.NPC
         /// </summary>
         public bool IsLeaving { private set; get; }
 
+        private Chair _targetChair;
+
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
@@ -55,7 +58,12 @@ namespace GithubGameOff2022.NPC
             _currentNeed = _needs.Dequeue();
             Debug.Log("Current Need: " + _currentNeed);
             UpdateDestination();
-            
+
+            // We get a random chair and say its ours, then move to it
+            _targetChair = MainRoomManager.Instance.FreeChair;
+            _targetChair.IsBusy = true;
+            _agent.SetDestination(_targetChair.transform.position);
+
             _timer = 9f;
             _exitPoint = transform.position;
         }
@@ -64,11 +72,13 @@ namespace GithubGameOff2022.NPC
         {
             if (!IsLeaving)
             {
-
                 _timer -= Time.deltaTime;
                 if (_timer <= 0f)
                 {
                     Debug.Log("Time out ! Leaving... (with current need " + _currentNeed + " at " + _currentNeedPercentage + "%)");
+                    // We free the chair and go back to the exit
+                    _targetChair.IsBusy = false;
+                    _targetChair = null;
                     IsLeaving = true;
                     UpdateDestination();
                 }
