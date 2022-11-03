@@ -34,7 +34,7 @@ namespace GithubGameOff2022.NPC
             _targetChair.IsBusy = true;
             _agent.SetDestination(_targetChair.transform.position);
 
-            _timer = 6f;
+            _timer = 7f;
             _exitPoint = transform.position;
         }
 
