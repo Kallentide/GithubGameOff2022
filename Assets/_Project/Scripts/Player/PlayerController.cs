@@ -11,13 +11,15 @@ namespace GithubGameOff2022.Player
         [SerializeField]
         private PlayerInfo _info;
 
+        [SerializeField]
+        private GameObject _rotTarget;
+
         private CharacterController _cc;
         private Vector3 _mov;
         private float _verSpeed;
 
         private TMP_Text _indicatorText;
         private IInteractible _interactionTarget;
-
         public bool IsReady { set; get; } // Used at the start of a day, game only starts when all people are ready
 
         private void Awake()
@@ -74,7 +76,7 @@ namespace GithubGameOff2022.Player
             _mov = value.ReadValue<Vector2>().normalized;
             if (_mov.magnitude != 0f)
             {
-                transform.rotation = Quaternion.LookRotation(new Vector3(_mov.x, 0f, _mov.y), Vector3.up);
+                _rotTarget.transform.rotation = Quaternion.LookRotation(new Vector3(_mov.x, 0f, _mov.y), Vector3.up);
             }
         }
 
