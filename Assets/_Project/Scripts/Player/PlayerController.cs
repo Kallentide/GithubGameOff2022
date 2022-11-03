@@ -15,7 +15,9 @@ namespace GithubGameOff2022.Player
         private GameObject _rotTarget;
 
         [SerializeField]
-        private Transform _hands;
+        private Transform _handsTransform;
+
+        public Hands Hands { set; get; }
 
         private CharacterController _cc;
         private Vector3 _mov;

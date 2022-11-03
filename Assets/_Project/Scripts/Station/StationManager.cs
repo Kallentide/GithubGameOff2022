@@ -26,12 +26,22 @@ namespace GameOff2022.Station
             _uiContainer.gameObject.SetActive(false);
         }
 
-        private void ProduceItem()
+        private void InstantiateItem(PlayerController player)
+        {
+            var go = Instantiate(_stationSo.OutputSo.Item);
+            player.Hands = _stationSo.OutputSo == null ? null : new()
+            {
+                Instance = go,
+                Item = _stationSo.OutputSo
+            };
+        }
+
+        public void DoAction(PlayerController player)
         {
             _uiContainer.gameObject.SetActive(true);
             if (_stationSo.CraftingDuration > 0f)
             {
-                InstantiateItem();
+                InstantiateItem(player);
             }
             else
             {
@@ -54,28 +64,21 @@ namespace GameOff2022.Station
                             _isBusy = false;
                             _progressText.text = string.Empty;
                             _uiContainer.gameObject.SetActive(false);
-                            InstantiateItem();
+                            InstantiateItem(player);
                             _tween.Kill();
 
                         }).SetUpdate(true);
             }
         }
 
-        private void InstantiateItem()
-        {
-            var tempObject = Instantiate(_stationSo.OutputSo.Item);
-            // TODO: Spawn item in hands of the player
-            //tempObject.transform.position = 
-        }
-
-        public void DoAction(PlayerController player)
-        {
-            ProduceItem();
-        }
-
         public bool CanInterract(PlayerController player)
         {
-            return !_isBusy;
+            if (_isBusy)
+            {
+                return false;
+            }
+            if (_stationSo.InputSo == null) return player.Hands == null;
+            return _stationSo.InputSo == player.Hands.Item;
         }
 
         public string GetInteractionName(PlayerController player)
