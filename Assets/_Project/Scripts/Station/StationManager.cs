@@ -28,35 +28,37 @@ namespace GameOff2022.Station
 
         private void ProduceItem()
         {
-            if (_isBusy)
-            {
-                return;
-            }
-
             _uiContainer.gameObject.SetActive(true);
-            _isBusy = true;
-            var targetValue = 1f;
-            _productionFillImage.fillAmount = 0f;
-            var currentValue = _productionFillImage.fillAmount;
-            _tween = DOTween.To(() => currentValue,
-                    setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
-                .OnUpdate(
-                    () =>
-                    {
-                        var value = (_productionFillImage.fillAmount * 100f);
-                        _progressText.text = $"{value:F1} %";
+            if (_stationSo.CraftingDuration > 0f)
+            {
+                InstantiateItem();
+            }
+            else
+            {
+                _isBusy = true;
+                var targetValue = 1f;
+                _productionFillImage.fillAmount = 0f;
+                var currentValue = _productionFillImage.fillAmount;
+                _tween = DOTween.To(() => currentValue,
+                        setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
+                    .OnUpdate(
+                        () =>
+                        {
+                            var value = (_productionFillImage.fillAmount * 100f);
+                            _progressText.text = $"{value:F1} %";
 
-                    }).OnComplete(() =>
-                {
+                        }).OnComplete(() =>
+                        {
 
-                    _productionFillImage.fillAmount = 0f;
-                    _isBusy = false;
-                    _progressText.text = string.Empty;
-                    _uiContainer.gameObject.SetActive(false);
-                    InstantiateItem();
-                    _tween.Kill();
+                            _productionFillImage.fillAmount = 0f;
+                            _isBusy = false;
+                            _progressText.text = string.Empty;
+                            _uiContainer.gameObject.SetActive(false);
+                            InstantiateItem();
+                            _tween.Kill();
 
-                }).SetUpdate(true);
+                        }).SetUpdate(true);
+            }
         }
 
         private void InstantiateItem()
