@@ -14,6 +14,9 @@ namespace GithubGameOff2022.Player
         [SerializeField]
         private GameObject _rotTarget;
 
+        [SerializeField]
+        private Transform _hands;
+
         private CharacterController _cc;
         private Vector3 _mov;
         private float _verSpeed;
@@ -21,6 +24,8 @@ namespace GithubGameOff2022.Player
         private TMP_Text _indicatorText;
         private IInteractible _interactionTarget;
         public bool IsReady { set; get; } // Used at the start of a day, game only starts when all people are ready
+
+        public bool CanMove { set; get; } = true;
 
         private void Awake()
         {
@@ -45,7 +50,17 @@ namespace GithubGameOff2022.Player
 
         private void FixedUpdate()
         {
+            if (!CanMove)
+            {
+                return;
+            }
+
             Vector3 desiredMove = new(_mov.x, 0f, _mov.y);
+
+            if (_mov.magnitude != 0f)
+            {
+                _rotTarget.transform.rotation = Quaternion.LookRotation(desiredMove, Vector3.up);
+            }
 
             // Get a normal for the surface that is being touched to move along it
             Physics.SphereCast(transform.position, _cc.radius, Vector3.down, out RaycastHit hitInfo,
@@ -74,10 +89,6 @@ namespace GithubGameOff2022.Player
         public void OnMovement(InputAction.CallbackContext value)
         {
             _mov = value.ReadValue<Vector2>().normalized;
-            if (_mov.magnitude != 0f)
-            {
-                _rotTarget.transform.rotation = Quaternion.LookRotation(new Vector3(_mov.x, 0f, _mov.y), Vector3.up);
-            }
         }
 
         public void OnAction(InputAction.CallbackContext value)

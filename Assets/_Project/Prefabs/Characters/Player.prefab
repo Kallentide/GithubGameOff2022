@@ -345,6 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: f0c232cff3045f349a1e906f66fc0313, type: 2}
   _rotTarget: {fileID: 5774582417068156368}
+  _hands: {fileID: 1133916585752755239}
 --- !u!1 &3476917033785990220
 GameObject:
   m_ObjectHideFlags: 0

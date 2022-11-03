@@ -40,7 +40,7 @@ namespace GameOff2022.Station
                 _productionFillImage.fillAmount = 0f;
                 var currentValue = _productionFillImage.fillAmount;
                 _tween = DOTween.To(() => currentValue,
-                        setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
+                    setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
                     .OnUpdate(
                         () =>
                         {
