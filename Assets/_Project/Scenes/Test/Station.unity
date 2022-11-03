@@ -332,7 +332,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24476
+  m_Name: pb_Mesh31420
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: fcb402ff3b64d05419b1eace37cc3375, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 33fd3fa1458cd0642b5588b84f22a913, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &709577148
 PrefabInstance:
@@ -1233,10 +1233,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3460440303111348819, guid: 4e8c039f4c9a1a9438070888b3d32c5f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e2904a80f12a9b246b71c15de7687ed8, type: 2}
     - target: {fileID: 3460440303609631088, guid: 4e8c039f4c9a1a9438070888b3d32c5f, type: 3}
       propertyPath: m_Name
       value: Station

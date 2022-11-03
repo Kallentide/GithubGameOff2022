@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GameOff2022.SO.Station;
 using GithubGameOff2022.Player;
 using GithubGameOff2022.Prop;
 using TMPro;
@@ -7,72 +8,51 @@ using UnityEngine.UI;
 
 namespace GameOff2022.Station
 {
-    public class StationManager : MonoBehaviour,IInteractible
+    public class StationManager : MonoBehaviour, IInteractible
     { 
-        
         [Tooltip("Add to station scriptable here ")]
-        [Space][SerializeField] private StationSo stationSo;
-        [Space] [SerializeField] private Image stationIcon;
-        [Space] [SerializeField] private Image productionFillImage;
-        [Space] [SerializeField] private TMP_Text progressText;
-        [Space] [SerializeField] private TMP_Text stationName;
+        [Space][SerializeField] private StationInfo _stationSo;
+        [Space][SerializeField] private GameObject _uiContainer;
+        [Space][SerializeField] private Image _stationIcon;
+        [Space][SerializeField] private Image _productionFillImage;
+        [Space][SerializeField] private TMP_Text _progressText;
         
         private bool _isBusy;
-        private bool _canInteract;
-
-        [Space] [SerializeField] private Transform stackTransform;
-
 
         private Tween _tween;
 
-        private void Start()
+        private void Awake()
         {
-            stationName.text = stationSo.stationName;
-            
+            _uiContainer.gameObject.SetActive(false);
         }
-
-        private void Update()
-        {
-            if (_canInteract)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    ProduceItem();
-                }
-            }
-         
-        }
-
 
         private void ProduceItem()
         {
-
             if (_isBusy)
             {
                 return;
             }
-            
-            
+
+            _uiContainer.gameObject.SetActive(true);
             _isBusy = true;
             var targetValue = 1f;
-            productionFillImage.fillAmount = 0f;
-            var currentValue = productionFillImage.fillAmount;
+            _productionFillImage.fillAmount = 0f;
+            var currentValue = _productionFillImage.fillAmount;
             _tween = DOTween.To(() => currentValue,
-                    setter: x => productionFillImage.fillAmount = x, targetValue, stationSo.craftingDuration)
+                    setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
                 .OnUpdate(
                     () =>
                     {
-
-                        var value = (productionFillImage.fillAmount * 100);
-                        progressText.text = value.ToString("F1") + " %";
-
+                        var value = (_productionFillImage.fillAmount * 100f);
+                        _progressText.text = $"{value:F1} %";
 
                     }).OnComplete(() =>
                 {
 
-                    productionFillImage.fillAmount = 0f;
+                    _productionFillImage.fillAmount = 0f;
                     _isBusy = false;
-                    progressText.text = "";
+                    _progressText.text = string.Empty;
+                    _uiContainer.gameObject.SetActive(false);
                     InstantiateItem();
                     _tween.Kill();
 
@@ -81,13 +61,13 @@ namespace GameOff2022.Station
 
         private void InstantiateItem()
         {
-            var tempObject = Instantiate(stationSo.outputSo.item);
-            tempObject.transform.position = stackTransform.position;
+            var tempObject = Instantiate(_stationSo.OutputSo.Item);
+            // TODO: Spawn item in hands of the player
+            //tempObject.transform.position = 
         }
 
         public void DoAction(PlayerController player)
         {
-            Debug.Log("interacting with station");
             ProduceItem();
         }
 
@@ -98,7 +78,7 @@ namespace GameOff2022.Station
 
         public string GetInteractionName(PlayerController player)
         {
-            return stationSo.stationName;
+            return _stationSo.StationName;
         }
     }
 }
