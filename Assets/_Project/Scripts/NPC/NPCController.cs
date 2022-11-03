@@ -6,6 +6,9 @@ namespace GithubGameOff2022.NPC
 {
     public class NPCController : MonoBehaviour
     {
+        [SerializeField]
+        private Transform _hands;
+
         private NavMeshAgent _agent;
 
         /// <summary>
