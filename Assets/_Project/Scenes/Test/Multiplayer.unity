@@ -1257,7 +1257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1347904481}
         m_TargetAssemblyTypeName: GithubGameOff2022.TimeManager, Assembly-CSharp
-        m_MethodName: OnPlayerAdd
+        m_MethodName: OnPlayerCountChange
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1272,7 +1272,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1347904481}
         m_TargetAssemblyTypeName: GithubGameOff2022.TimeManager, Assembly-CSharp
-        m_MethodName: OnPlayerRemove
+        m_MethodName: OnPlayerCountChange
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

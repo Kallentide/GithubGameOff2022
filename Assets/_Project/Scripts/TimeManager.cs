@@ -20,7 +20,7 @@ namespace GithubGameOff2022
         private void Awake()
         {
             Instance = this;
-            UpdateReadyText(0);
+            UpdateReadyText();
         }
 
         /// <summary>
@@ -37,11 +37,11 @@ namespace GithubGameOff2022
             }
             else
             {
-                UpdateReadyText(0);
+                UpdateReadyText();
             }
         }
 
-        public void UpdateReadyText(int countModifier)
+        public void UpdateReadyText()
         {
             var playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
             if (playerCount == 0)
@@ -51,12 +51,7 @@ namespace GithubGameOff2022
             _readyText.text = Translate.Instance.Tr("ready") + $" {GameObject.FindGameObjectsWithTag("Player").Count(x => x.GetComponent<PlayerController>().IsReady)}/{playerCount}";
         }
 
-        public void OnPlayerAdd(PlayerInput _)
-        {
-            UpdateReadyText(1);
-        }
-
-        public void OnPlayerRemove(PlayerInput _) // Not sure when this event is called so hopefully the player is destroyed beforehand?
+        public void OnPlayerCountChange(PlayerInput _)
         {
             CheckAllPlayerReady();
         }
