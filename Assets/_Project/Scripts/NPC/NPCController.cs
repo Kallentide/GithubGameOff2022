@@ -8,8 +8,14 @@ namespace GithubGameOff2022.NPC
 {
     public class NPCController : MonoBehaviour
     {
+        public enum Need {
+            Bath = 1, 
+            Massage = 2,
+            Drink = 3
+        };
+
         [SerializeField]
-        private MonsterInfo _info;
+        private MonsterInfo _monsterSO;
 
         private NavMeshAgent _agent;
 
@@ -23,18 +29,13 @@ namespace GithubGameOff2022.NPC
         /// </summary>
         private float _timer;
 
-        public enum Need {
-            Bath = 1, 
-            Massage = 2
-        };
-
         /// <summary>
         /// Queue of needs ordered
         /// </summary>
         private Queue<Need> _needs;
 
         /// <summary>
-        /// Current need enum
+        /// Current need 
         /// </summary>
         private Need? _currentNeed;
         
@@ -53,20 +54,13 @@ namespace GithubGameOff2022.NPC
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _needs = new Queue<Need>(_info.Needs);
-
+            _needs = new Queue<Need>(_monsterSO.Needs);
             _currentNeed = _needs.Dequeue();
-            Debug.Log("Current Need: " + _currentNeed);
-            UpdateDestination();
-
-            // We get a random chair and say its ours, then move to it
-            _targetChair = MainRoomManager.Instance.FreeChair;
-            _targetChair.IsBusy = true;
-            _agent.SetDestination(_targetChair.transform.position);
-
             _timer = 9f;
             _exitPoint = transform.position;
-        }
+ 
+            UpdateDestination();
+       }
 
         private void Update()
         {
@@ -75,23 +69,23 @@ namespace GithubGameOff2022.NPC
                 _timer -= Time.deltaTime;
                 if (_timer <= 0f)
                 {
-                    Debug.Log("Time out ! Leaving... (with current need " + _currentNeed + " at " + _currentNeedPercentage + "%)");
-                    // We free the chair and go back to the exit
-                    _targetChair.IsBusy = false;
-                    _targetChair = null;
+                    if (_targetChair != null)
+                    {
+                        // Free the chair
+                        _targetChair.IsBusy = false;
+                        _targetChair = null;
+                    }
                     IsLeaving = true;
                     UpdateDestination();
                 }
                 else if (_currentNeedPercentage >= 100)
                 {
-                    Debug.Log("Need " + _currentNeed + " reached 100%");
                     _currentNeedPercentage = 0;
 
                     // Currend need full, take the next it if any
                     if (_needs.Count > 0)
                     {
                         _currentNeed = _needs.Dequeue();
-                        Debug.Log("Current Need: " + _currentNeed);
                     }
                     else
                     {
@@ -117,6 +111,10 @@ namespace GithubGameOff2022.NPC
             {
                 _currentNeedPercentage += Time.deltaTime * 15;
             }
+            else if (_currentNeed == Need.Drink)
+            {
+                _currentNeedPercentage += Time.deltaTime * 15;
+            }
         }
 
         private void UpdateDestination()
@@ -133,6 +131,13 @@ namespace GithubGameOff2022.NPC
             else if (_currentNeed == Need.Massage)
             {
                 _agent.SetDestination(new Vector3(-3,0,0));
+            }
+            else if (_currentNeed == Need.Drink)
+            {
+                // We get a random chair and say its ours, then move to it
+                _targetChair = MainRoomManager.Instance.FreeChair;
+                _targetChair.IsBusy = true;
+                _agent.SetDestination(_targetChair.transform.position);
             }
         }
     }

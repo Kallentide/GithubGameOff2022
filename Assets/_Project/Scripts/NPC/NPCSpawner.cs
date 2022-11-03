@@ -25,7 +25,7 @@ namespace GithubGameOff2022.NPC
         {
             while (true)
             {
-                Instantiate(_info.PossibleSpawns[0].Prefab, transform);
+                Instantiate(_info.PossibleSpawns[Random.Range(0, _info.PossibleSpawns.Length)], transform);
                 _text.text = $"{_info.SpawnInterval}";
                 for (var i = _info.SpawnInterval; i >= 0; i--)
                 {

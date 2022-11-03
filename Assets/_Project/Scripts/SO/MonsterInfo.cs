@@ -7,6 +7,9 @@ namespace GithubGameOff2022.SO
     [CreateAssetMenu(menuName = "ScriptableObject/MonsterInfo", fileName = "MonsterInfo")]
     public class MonsterInfo : ScriptableObject
     {
+        [Tooltip("Monster name")]
+        public string displayedName;
+
         [Tooltip("Monster prefab")]
         public GameObject Prefab;
 

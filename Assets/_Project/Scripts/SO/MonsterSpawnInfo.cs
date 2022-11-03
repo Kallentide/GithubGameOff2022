@@ -9,6 +9,6 @@ namespace GithubGameOff2022.SO
         public int SpawnInterval;
 
         [Tooltip("Possible monsters that can spawn")]
-        public MonsterInfo[] PossibleSpawns;
+        public GameObject[] PossibleSpawns;
     }
 }
