@@ -23,6 +23,7 @@ namespace GithubGameOff2022.Player
         private void Awake()
         {
             _cc = GetComponent<CharacterController>();
+            _indicatorText = GetComponentInChildren<TMP_Text>();
 
             var triggerZone = GetComponentInChildren<TriggerDetector>();
             triggerZone.TriggerEnterEvent.AddListener(new((coll) =>
@@ -71,6 +72,10 @@ namespace GithubGameOff2022.Player
         public void OnMovement(InputAction.CallbackContext value)
         {
             _mov = value.ReadValue<Vector2>().normalized;
+            if (_mov.magnitude != 0f)
+            {
+                transform.rotation = Quaternion.LookRotation(new Vector3(_mov.x, 0f, _mov.y), Vector3.up);
+            }
         }
 
         public void OnAction(InputAction.CallbackContext value)
