@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GithubGameOff2022.Player;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace GithubGameOff2022
@@ -13,6 +15,11 @@ namespace GithubGameOff2022
         {
             Instance = this;
             OnReady = new();
+        }
+
+        public bool AreAllPlayerReady()
+        {
+            return GameObject.FindGameObjectsWithTag("Player").All(x => x.GetComponent<PlayerController>().IsReady);
         }
     }
 }

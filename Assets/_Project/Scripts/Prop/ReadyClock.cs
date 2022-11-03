@@ -15,7 +15,10 @@ namespace GithubGameOff2022.Prop
         public void DoAction(PlayerController player)
         {
             player.IsReady = true;
-            Debug.Log("An user is ready!");
+            if (TimeManager.Instance.AreAllPlayerReady())
+            {
+                TimeManager.Instance.OnReady.Invoke();
+            }
         }
 
         public string GetInteractionName(PlayerController player) => Translate.Instance.Tr("clock in");
