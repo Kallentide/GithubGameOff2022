@@ -8,12 +8,12 @@ namespace GithubGameOff2022.SO
     public class MonsterInfo : ScriptableObject
     {
         [Tooltip("Monster name")]
-        public string displayedName;
+        public string DisplayedName;
 
         [Tooltip("Monster prefab")]
         public GameObject Prefab;
 
         [Tooltip("List of needs that will be fulfilled in the defined order")]
-        public List<NPCController.Need> Needs;
+        public List<Need> Needs;
     }
 }
