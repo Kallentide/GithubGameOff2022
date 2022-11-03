@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 718119829}
     m_Modifications:
+    - target: {fileID: 7833453628812679352, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 96a0d0495b5685944b3732fd5c0a620e, type: 2}
     - target: {fileID: 7833453628812679354, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
       propertyPath: m_Name
       value: Chair (1)
@@ -624,6 +628,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 718119829}
     m_Modifications:
+    - target: {fileID: 7833453628812679352, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 96a0d0495b5685944b3732fd5c0a620e, type: 2}
     - target: {fileID: 7833453628812679354, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
       propertyPath: m_Name
       value: Chair (2)
@@ -964,7 +972,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 204b93ee3e50b3d43a455c66fa62b367, type: 2}
+  - {fileID: 2100000, guid: bf072d87ce460e74e8fc313c52d655aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1701,7 +1709,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b4eba441b2a5c44e8e7c2c46515a65f, type: 2}
+  - {fileID: 2100000, guid: e271e9b0472390c4ea0572cd596959a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1932,14 +1940,6 @@ PrefabInstance:
     - target: {fileID: 7833453628812679358, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
       propertyPath: m_RootOrder
       value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7833453628812679358, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.7499998
-      objectReference: {fileID: 0}
-    - target: {fileID: 7833453628812679358, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.7499998
       objectReference: {fileID: 0}
     - target: {fileID: 7833453628812679358, guid: f1368cb665572334db6dc40c93e718d5, type: 3}
       propertyPath: m_LocalPosition.x
