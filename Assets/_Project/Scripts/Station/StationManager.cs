@@ -44,6 +44,8 @@ namespace GameOff2022.Station
             }
             else
             {
+                player.CanMove = false;
+
                 _uiContainer.gameObject.SetActive(true);
                 _isBusy = true;
                 var targetValue = 1f;
@@ -65,6 +67,9 @@ namespace GameOff2022.Station
                             _progressText.text = string.Empty;
                             _uiContainer.gameObject.SetActive(false);
                             InstantiateItem(player);
+
+                            player.CanMove = true;
+
                             _tween.Kill();
 
                         }).SetUpdate(true);
