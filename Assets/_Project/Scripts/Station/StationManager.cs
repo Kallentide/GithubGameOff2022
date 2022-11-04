@@ -38,13 +38,13 @@ namespace GameOff2022.Station
 
         public void DoAction(PlayerController player)
         {
-            _uiContainer.gameObject.SetActive(true);
             if (_stationSo.CraftingDuration == 0f)
             {
                 InstantiateItem(player);
             }
             else
             {
+                _uiContainer.gameObject.SetActive(true);
                 _isBusy = true;
                 var targetValue = 1f;
                 _productionFillImage.fillAmount = 0f;

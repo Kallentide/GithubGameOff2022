@@ -17,7 +17,20 @@ namespace GithubGameOff2022.Player
         [SerializeField]
         private Transform _handsTransform;
 
-        public Hands Hands { set; get; }
+        private Hands _hands;
+        public Hands Hands
+        {
+            set
+            {
+                _hands = value;
+                if (value != null)
+                {
+                    _hands.Instance.transform.parent = _handsTransform;
+                    _hands.Instance.transform.position = _handsTransform.position;
+                }
+            }
+            get => _hands;
+        }
 
         private CharacterController _cc;
         private Vector3 _mov;
