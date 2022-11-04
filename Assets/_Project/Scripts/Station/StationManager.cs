@@ -39,7 +39,7 @@ namespace GameOff2022.Station
         public void DoAction(PlayerController player)
         {
             _uiContainer.gameObject.SetActive(true);
-            if (_stationSo.CraftingDuration > 0f)
+            if (_stationSo.CraftingDuration == 0f)
             {
                 InstantiateItem(player);
             }
@@ -78,7 +78,7 @@ namespace GameOff2022.Station
                 return false;
             }
             if (_stationSo.InputSo == null) return player.Hands == null;
-            return _stationSo.InputSo == player.Hands.Item;
+            return player.Hands != null && _stationSo.InputSo == player.Hands.Item;
         }
 
         public string GetInteractionName(PlayerController player)
