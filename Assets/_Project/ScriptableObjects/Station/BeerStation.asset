@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4114283e563b7014187a1abdfa07a5f6, type: 3}
   m_Name: BeerStation
   m_EditorClassIdentifier: 
-  CraftingDuration: 5
+  CraftingDuration: 2
   StationName: beer station
   InputSo: {fileID: 11400000, guid: 23d0ea40457e4c74196b8a3a69714131, type: 2}
   OutputSo: {fileID: 11400000, guid: f0b7d443f68990c4d93d8eeee9a54444, type: 2}

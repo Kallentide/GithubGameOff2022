@@ -27,6 +27,10 @@ namespace GithubGameOff2022.Player
                 {
                     _hands.Instance.transform.parent = _handsTransform;
                     _hands.Instance.transform.position = _handsTransform.position;
+                    if (value.Instance.TryGetComponent<Rigidbody>(out var rb))
+                    {
+                        rb.isKinematic = true;
+                    }
                 }
             }
             get => _hands;
