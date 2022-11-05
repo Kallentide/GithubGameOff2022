@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 5004866777043127871}
   m_Father: {fileID: 2977589219088099735}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 44.745, y: 0, z: 0}
 --- !u!20 &4926870000008544260
 Camera:
@@ -105,7 +105,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5602817581589452058}
-  m_RootOrder: -1
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2977589219088099731
 GameObject:
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 2977589219088099732}
   - component: {fileID: 2977589219088099722}
   - component: {fileID: 8055855226412379807}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1683641889992916115}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -565,7 +565,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5602817581589452058}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1501787186878019740
 BoxCollider:
@@ -623,5 +623,5 @@ Transform:
   - {fileID: 2581600965183487024}
   - {fileID: 1133916585752755239}
   m_Father: {fileID: 2977589219088099735}
-  m_RootOrder: -1
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
