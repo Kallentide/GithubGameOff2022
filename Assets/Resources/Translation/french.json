@@ -2,5 +2,10 @@
     "clock in": "Pointer",
     "ready": "Prêt :",
 
-    "beer station" : "Machine à bière"
+    "needEmptyHands": "Tu ne peux pas porter deux choses en même temps !",
+    "needObject": "Il te faut un object pour utiliser ça !",
+    "wrongItem" : "Tu n'as pas le bon objet pour utiliser ça !",
+
+    "mugStationOk" : "Prendre chope",
+    "beerStationOk" : "Remplir chope"
 }

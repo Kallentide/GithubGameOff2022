@@ -2,6 +2,8 @@
 {
     public enum Need
     {
+        None,
+
         Bath,
         Massage,
         Drink

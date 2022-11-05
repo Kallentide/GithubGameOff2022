@@ -18,6 +18,6 @@ namespace GithubGameOff2022.Prop
             TimeManager.Instance.CheckAllPlayerReady();
         }
 
-        public string GetInteractionName(PlayerController player) => Translate.Instance.Tr("clock in");
+        public string GetInteractionName(PlayerController player) => CanInterract(player) ? Translate.Instance.Tr("clock in") : string.Empty;
     }
 }

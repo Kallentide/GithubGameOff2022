@@ -2,5 +2,10 @@
     "clock in": "Clock in",
     "ready": "Ready:",
 
-    "beer station" : "Beer station"
+    "needEmptyHands": "You can't carry two things at once!",
+    "needObject": "You need an object to use that!",
+    "wrongItem" : "You don't have the right item for that!",
+
+    "mugStationOk" : "Take tankard",
+    "beerStationOk" : "Fill tankard"
 }
