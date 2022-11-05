@@ -54,8 +54,7 @@ namespace GithubGameOff2022.Player
             var triggerZone = GetComponentInChildren<TriggerDetector>();
             triggerZone.TriggerEnterEvent.AddListener(new((coll) =>
             {
-                var target = coll.GetComponent<IInteractible>();
-                if (target != null)
+                if (coll.TryGetComponent<IInteractible>(out var target))
                 {
                     _indicatorText.text = target.GetInteractionName(this);
                     if (target.CanInterract(this))
