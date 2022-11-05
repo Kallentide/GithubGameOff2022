@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameOff2022.SO.Station
 {
-    [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Items/Item")]
+    [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObject/Items/Item")]
     public class ItemInfo : ScriptableObject
     {
         [Space] public Need TargetNeed;

@@ -1,10 +1,14 @@
-﻿using GithubGameOff2022.Player;
+﻿using DG.Tweening;
+using GithubGameOff2022.NPC;
+using GithubGameOff2022.Player;
+using GithubGameOff2022.SO;
 using GithubGameOff2022.Translation;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace GithubGameOff2022
 {
@@ -15,12 +19,51 @@ namespace GithubGameOff2022
         [SerializeField]
         private TMP_Text _readyText;
 
+        [SerializeField]
+        private Image _dayProgress;
+
         public UnityEvent OnReady { private set; get; } = new();
+        private Tween _tween;
+
+        [SerializeField]
+        private RoundInfo _info;
+
+        public bool DidDayStart { private set; get; }
 
         private void Awake()
         {
             Instance = this;
+            OnReady.AddListener(new(() =>
+            {
+                _readyText.gameObject.SetActive(false);
+                _dayProgress.gameObject.SetActive(true);
+                _dayProgress.fillAmount = 0f;
+                DidDayStart = true;
+                _tween = DOTween.To(() => _dayProgress.fillAmount,
+                    setter: x => _dayProgress.fillAmount = x, 1f, _info.RoundDuration)
+                    .OnUpdate(
+                        () =>
+                        {}).OnComplete(() =>
+                        {
+                            _readyText.gameObject.SetActive(true);
+                            _dayProgress.gameObject.SetActive(false);
+                            DidDayStart = false;
+                            ResetReady();
+                        }).SetUpdate(true);
+            }));
             UpdateReadyText();
+        }
+
+        public void ResetReady() // TODO: Keep objects in list instead of searching them on scene everytimes
+        {
+            foreach (var m in GameObject.FindGameObjectsWithTag("Monster"))
+            {
+                m.GetComponent<NPCController>().Leave();
+            }
+            foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                p.GetComponent<PlayerController>().IsReady = false;
+            }
         }
 
         /// <summary>
