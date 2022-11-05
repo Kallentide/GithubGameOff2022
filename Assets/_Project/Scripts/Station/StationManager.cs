@@ -2,6 +2,7 @@ using DG.Tweening;
 using GameOff2022.SO.Station;
 using GithubGameOff2022.Player;
 using GithubGameOff2022.Prop;
+using GithubGameOff2022.Translation;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,21 +27,35 @@ namespace GameOff2022.Station
             _uiContainer.gameObject.SetActive(false);
         }
 
-        private void ProduceItem()
+        private void InstantiateItem(PlayerController player)
         {
-            _uiContainer.gameObject.SetActive(true);
-            if (_stationSo.CraftingDuration > 0f)
+            var go = Instantiate(_stationSo.OutputSo.Item);
+            player.Hands = _stationSo.OutputSo == null ? null : new()
             {
-                InstantiateItem();
+                Instance = go,
+                Item = _stationSo.OutputSo
+            };
+        }
+
+        public void DoAction(PlayerController player)
+        {
+            player.Hands = null;
+
+            if (_stationSo.CraftingDuration == 0f)
+            {
+                InstantiateItem(player);
             }
             else
             {
+                player.CanMove = false;
+
+                _uiContainer.gameObject.SetActive(true);
                 _isBusy = true;
                 var targetValue = 1f;
                 _productionFillImage.fillAmount = 0f;
                 var currentValue = _productionFillImage.fillAmount;
                 _tween = DOTween.To(() => currentValue,
-                        setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
+                    setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
                     .OnUpdate(
                         () =>
                         {
@@ -54,33 +69,41 @@ namespace GameOff2022.Station
                             _isBusy = false;
                             _progressText.text = string.Empty;
                             _uiContainer.gameObject.SetActive(false);
-                            InstantiateItem();
+                            InstantiateItem(player);
+
+                            player.CanMove = true;
+
                             _tween.Kill();
 
                         }).SetUpdate(true);
             }
         }
 
-        private void InstantiateItem()
-        {
-            var tempObject = Instantiate(_stationSo.OutputSo.Item);
-            // TODO: Spawn item in hands of the player
-            //tempObject.transform.position = 
-        }
-
-        public void DoAction(PlayerController player)
-        {
-            ProduceItem();
-        }
-
         public bool CanInterract(PlayerController player)
         {
-            return !_isBusy;
+            if (_isBusy)
+            {
+                return false;
+            }
+            if (_stationSo.InputSo == null) return player.Hands == null;
+            return player.Hands != null && _stationSo.InputSo == player.Hands.Item;
         }
 
         public string GetInteractionName(PlayerController player)
         {
-            return _stationSo.StationName;
+            if (CanInterract(player))
+            {
+                return Translate.Instance.Tr(_stationSo.CommandAvailable);
+            }
+            if (_stationSo.InputSo == null)
+            {
+                return Translate.Instance.Tr("needEmptyHands");
+            }
+            if (player.Hands != null)
+            {
+                return Translate.Instance.Tr("needObject");
+            }
+            return Translate.Instance.Tr("wrongItem");
         }
     }
 }

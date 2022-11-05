@@ -4,13 +4,13 @@ using UnityEngine.AI;
 using GithubGameOff2022.SO;
 using System.Collections.Generic;
 using System.Linq;
+using GithubGameOff2022.Player;
 
 namespace GithubGameOff2022.NPC
 {
-    public class NPCController : MonoBehaviour
+    public class NPCController : MonoBehaviour, IInteractible
     {
-        [SerializeField]
-        private MonsterInfo _monsterSO;
+        public MonsterInfo MonsterSO { set; private get; }
 
         private NavMeshAgent _agent;
 
@@ -39,7 +39,6 @@ namespace GithubGameOff2022.NPC
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _needs = _monsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
             _timer = 9f;
             _exitPoint = transform.position;
 
@@ -47,6 +46,11 @@ namespace GithubGameOff2022.NPC
             _targetChair = MainRoomManager.Instance.FreeChair;
             _targetChair.IsBusy = true;
             _agent.SetDestination(_targetChair.transform.position);
+        }
+
+        private void Start()
+        {
+            _needs = MonsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
         }
 
         private void Update()
@@ -92,6 +96,29 @@ namespace GithubGameOff2022.NPC
                     _needs[need] = currValue;
                 }
             }
+        }
+
+        public void DoAction(PlayerController player)
+        {
+            if (player.Hands == null)
+            {
+                // TODO: Speak with monsters
+            }
+            else
+            {
+                SatisfyNeed(player.Hands.Item.TargetNeed, 100);
+                player.Hands = null;
+            }
+        }
+
+        public bool CanInterract(PlayerController player)
+        {
+            return player.Hands == null || MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed);
+        }
+
+        public string GetInteractionName(PlayerController player)
+        {
+            return CanInterract(player) ? "TODO" : string.Empty;
         }
     }
 }

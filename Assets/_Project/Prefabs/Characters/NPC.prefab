@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 57477098857793931}
   - component: {fileID: -9086893994652497933}
   - component: {fileID: -2656102080991800211}
+  - component: {fileID: -6154690334258738052}
   m_Layer: 7
-  m_Name: Werewolf
+  m_Name: NPC
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7486ee42e12c645b19bee2e31f5e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _info: {fileID: 11400000, guid: 7af5baf2c6564204093d38caa2a664df, type: 2}
+  _monsterSO: {fileID: 11400000, guid: 394b5463c21cb2049b623cb6370ae982, type: 2}
 --- !u!54 &-2656102080991800211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,3 +153,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &-6154690334258738052
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095851923358415490}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.75, y: 1, z: 0.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
