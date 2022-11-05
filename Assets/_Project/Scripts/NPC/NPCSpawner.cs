@@ -25,7 +25,9 @@ namespace GithubGameOff2022.NPC
         {
             while (true)
             {
-                Instantiate(_info.PossibleSpawns[Random.Range(0, _info.PossibleSpawns.Length)].Prefab, transform);
+                var targetMonster = _info.PossibleSpawns[Random.Range(0, _info.PossibleSpawns.Length)];
+                var go = Instantiate(targetMonster.Prefab, transform);
+                go.GetComponent<NPCController>().MonsterSO = targetMonster;
                 _text.text = $"{_info.SpawnInterval}";
                 for (var i = _info.SpawnInterval; i >= 0; i--)
                 {
