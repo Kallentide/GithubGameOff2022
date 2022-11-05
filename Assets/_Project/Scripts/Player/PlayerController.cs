@@ -22,16 +22,20 @@ namespace GithubGameOff2022.Player
         {
             set
             {
-                _hands = value;
+                if (_hands != null)
+                {
+                    Destroy(_hands.Instance.gameObject);
+                }
                 if (value != null)
                 {
-                    _hands.Instance.transform.parent = _handsTransform;
-                    _hands.Instance.transform.position = _handsTransform.position;
+                    value.Instance.transform.parent = _handsTransform;
+                    value.Instance.transform.position = _handsTransform.position;
                     if (value.Instance.TryGetComponent<Rigidbody>(out var rb))
                     {
                         rb.isKinematic = true;
                     }
                 }
+                _hands = value;
             }
             get => _hands;
         }

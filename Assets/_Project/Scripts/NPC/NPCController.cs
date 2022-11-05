@@ -4,10 +4,12 @@ using UnityEngine.AI;
 using GithubGameOff2022.SO;
 using System.Collections.Generic;
 using System.Linq;
+using GithubGameOff2022.Player;
+using GameOff2022.SO.Station;
 
 namespace GithubGameOff2022.NPC
 {
-    public class NPCController : MonoBehaviour
+    public class NPCController : MonoBehaviour, IInteractible
     {
         [SerializeField]
         private MonsterInfo _monsterSO;
@@ -92,6 +94,29 @@ namespace GithubGameOff2022.NPC
                     _needs[need] = currValue;
                 }
             }
+        }
+
+        public void DoAction(PlayerController player)
+        {
+            if (player.Hands == null)
+            {
+                // TODO: Speak with monsters
+            }
+            else
+            {
+                SatisfyNeed(player.Hands.Item.TargetNeed, 100);
+                player.Hands = null;
+            }
+        }
+
+        public bool CanInterract(PlayerController player)
+        {
+            return player.Hands == null || _monsterSO.Needs.Contains(player.Hands.Item.TargetNeed);
+        }
+
+        public string GetInteractionName(PlayerController player)
+        {
+            return "TODO";
         }
     }
 }

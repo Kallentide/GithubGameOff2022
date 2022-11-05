@@ -39,11 +39,7 @@ namespace GameOff2022.Station
 
         public void DoAction(PlayerController player)
         {
-            if (player.Hands != null)
-            {
-                Destroy(player.Hands.Instance);
-                player.Hands = null;
-            }
+            player.Hands = null;
 
             if (_stationSo.CraftingDuration == 0f)
             {
