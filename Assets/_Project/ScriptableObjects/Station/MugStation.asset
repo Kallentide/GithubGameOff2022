@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MugStation
   m_EditorClassIdentifier: 
   CraftingDuration: 0
-  StationName: beer station
+  CommandAvailable: mugStationOk
+  CommandNotAvailable: mugStationNo
   InputSo: {fileID: 0}
   OutputSo: {fileID: 11400000, guid: 23d0ea40457e4c74196b8a3a69714131, type: 2}

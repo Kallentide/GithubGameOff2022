@@ -2,6 +2,7 @@ using DG.Tweening;
 using GameOff2022.SO.Station;
 using GithubGameOff2022.Player;
 using GithubGameOff2022.Prop;
+using GithubGameOff2022.Translation;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -94,7 +95,19 @@ namespace GameOff2022.Station
 
         public string GetInteractionName(PlayerController player)
         {
-            return _stationSo.StationName;
+            if (CanInterract(player))
+            {
+                return Translate.Instance.Tr(_stationSo.CommandAvailable);
+            }
+            if (_stationSo.InputSo == null)
+            {
+                return Translate.Instance.Tr("needEmptyHands");
+            }
+            if (player.Hands != null)
+            {
+                return Translate.Instance.Tr("needObject");
+            }
+            return Translate.Instance.Tr("wrongItem");
         }
     }
 }

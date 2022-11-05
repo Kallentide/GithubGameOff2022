@@ -55,10 +55,13 @@ namespace GithubGameOff2022.Player
             triggerZone.TriggerEnterEvent.AddListener(new((coll) =>
             {
                 var target = coll.GetComponent<IInteractible>();
-                if (target != null && target.CanInterract(this))
+                if (target != null)
                 {
                     _indicatorText.text = target.GetInteractionName(this);
-                    _interactionTarget = target;
+                    if (target.CanInterract(this))
+                    {
+                        _interactionTarget = target;
+                    }
                 }
             }));
             triggerZone.TriggerExitEvent.AddListener(new((coll) => {
