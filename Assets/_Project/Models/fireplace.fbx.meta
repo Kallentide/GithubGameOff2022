@@ -1,9 +1,49 @@
 fileFormatVersion: 2
 guid: 066e4f0f95ba7cb4582833d640119b6a
 ModelImporter:
-  serializedVersion: 22103
+  serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Chimney_Black
+    second: {fileID: 2100000, guid: 4b4fff3b0347b8a47b00f49f7f80402e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Chimney_Brown
+    second: {fileID: 2100000, guid: 1c1f22f8632316645b2ac3dec0baac02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Chimney_Maroon
+    second: {fileID: 2100000, guid: 3e6bddb74ac25f446a9e314f45fcfaab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Chimney_Orange
+    second: {fileID: 2100000, guid: f4063d6b5d0e4314ca7f73d8532cad3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Fire_Black
+    second: {fileID: 2100000, guid: 186bafa4612e7c648af45e1315e5135d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Fire_Brown
+    second: {fileID: 2100000, guid: 78b9c7dcb67984f4ebbff16d9f1d079e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Fire_Grey.001
+    second: {fileID: 2100000, guid: 81b34ee0288b81d4b9697dba7eb2c14a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Fire_Tan
+    second: {fileID: 2100000, guid: b15d459efec281947b67c424494753f4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -67,7 +107,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -100,7 +139,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

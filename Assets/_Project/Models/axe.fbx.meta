@@ -1,9 +1,24 @@
 fileFormatVersion: 2
 guid: f04374e7423ff5549b783eb748cebfc2
 ModelImporter:
-  serializedVersion: 22103
+  serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Axe_Brown
+    second: {fileID: 2100000, guid: d468163d68f5ad44f889dd15b13af10f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Axe_Grey
+    second: {fileID: 2100000, guid: 0efddd61d27a9c942a1d3827b58645b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Axe_Tan
+    second: {fileID: 2100000, guid: 0d6d4dcc0d02fbf45a928bb67231a825, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -67,7 +82,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -100,7 +114,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
