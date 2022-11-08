@@ -3,6 +3,7 @@ using GithubGameOff2022.NPC;
 using GithubGameOff2022.Player;
 using GithubGameOff2022.SO;
 using GithubGameOff2022.Translation;
+using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -52,6 +53,16 @@ namespace GithubGameOff2022
                         }).SetUpdate(true);
             }));
             UpdateReadyText();
+        }
+
+        /// <summary>
+        /// At the end of the day, we display on screen how well the player did
+        /// </summary>
+        public IEnumerator DisplayEndOfTheDayRecap()
+        {
+            CameraManager.Instance.EnableOfficeView();
+            yield return new WaitForSeconds(5f);
+            CameraManager.Instance.EnableGameView();
         }
 
         public void ResetReady() // TODO: Keep objects in list instead of searching them on scene everytimes
