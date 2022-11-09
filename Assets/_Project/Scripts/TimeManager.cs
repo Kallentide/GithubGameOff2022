@@ -1,10 +1,15 @@
-﻿using GithubGameOff2022.Player;
+﻿using DG.Tweening;
+using GithubGameOff2022.NPC;
+using GithubGameOff2022.Player;
+using GithubGameOff2022.SO;
 using GithubGameOff2022.Translation;
+using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace GithubGameOff2022
 {
@@ -15,12 +20,95 @@ namespace GithubGameOff2022
         [SerializeField]
         private TMP_Text _readyText;
 
+        [SerializeField]
+        private Image _dayProgress;
+
         public UnityEvent OnReady { private set; get; } = new();
+        private Tween _tween;
+
+        [SerializeField]
+        private RoundInfo _info;
+
+        [SerializeField]
+        private Transform _recapCostContainer;
+
+        [SerializeField]
+        private GameObject _costPrefab;
+
+        public bool DidDayStart { private set; get; }
 
         private void Awake()
         {
             Instance = this;
+            OnReady.AddListener(new(() =>
+            {
+                _readyText.gameObject.SetActive(false);
+                _dayProgress.gameObject.SetActive(true);
+                _dayProgress.fillAmount = 0f;
+                DidDayStart = true;
+                _tween = DOTween.To(() => _dayProgress.fillAmount,
+                    setter: x => _dayProgress.fillAmount = x, 1f, _info.RoundDuration)
+                    .OnUpdate(
+                        () =>
+                        {}).OnComplete(() =>
+                        {
+                            _dayProgress.gameObject.SetActive(false);
+                            DidDayStart = false;
+                            ResetReady();
+                            StartCoroutine(DisplayEndOfTheDayRecap());
+                        }).SetUpdate(true);
+            }));
             UpdateReadyText();
+        }
+
+        private float SpawnCostUI(string title, float cost, float currentMoney)
+        {
+            var newRemain = currentMoney - cost;
+            var go = Instantiate(_costPrefab, _recapCostContainer);
+            var costUI = go.GetComponent<CostUI>();
+            costUI.Name.text = title;
+            if (cost != 0)
+            {
+                costUI.Cost.text = $"{cost:0.00}";
+            }
+            costUI.Total.text = $"{newRemain:0.00}";
+            return newRemain;
+        }
+
+        private float GetPercent(float value, float percent)
+            => value * percent / 100f;
+
+        /// <summary>
+        /// At the end of the day, we display on screen how well the player did
+        /// </summary>
+        public IEnumerator DisplayEndOfTheDayRecap()
+        {
+            for (int i = 0; i < _recapCostContainer.childCount; i++) Destroy(_recapCostContainer.GetChild(i));
+
+            var baseMoney = 5000f;
+            SpawnCostUI("Income", baseMoney, baseMoney);
+            baseMoney = SpawnCostUI("Monster Paycheck", baseMoney > 2000 ? 2000 : baseMoney, baseMoney);
+            baseMoney = SpawnCostUI("Taxes (30%)", GetPercent(baseMoney, 30), baseMoney);
+            baseMoney = SpawnCostUI("Syndicate Cut (20%)", GetPercent(baseMoney, 20), baseMoney);
+            baseMoney = SpawnCostUI("Dungeon Maintenance (40%)", GetPercent(baseMoney, 40), baseMoney);
+            SpawnCostUI("Your Cut", baseMoney, baseMoney);
+
+            CameraManager.Instance.EnableOfficeView();
+            yield return new WaitForSeconds(5f);
+            CameraManager.Instance.EnableGameView();
+            _readyText.gameObject.SetActive(true);
+        }
+
+        public void ResetReady() // TODO: Keep objects in list instead of searching them on scene everytimes
+        {
+            foreach (var m in GameObject.FindGameObjectsWithTag("Monster"))
+            {
+                m.GetComponent<NPCController>().Leave();
+            }
+            foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                p.GetComponent<PlayerController>().IsReady = false;
+            }
         }
 
         /// <summary>

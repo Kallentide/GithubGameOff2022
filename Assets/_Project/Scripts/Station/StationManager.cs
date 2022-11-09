@@ -51,11 +51,9 @@ namespace GameOff2022.Station
 
                 _uiContainer.gameObject.SetActive(true);
                 _isBusy = true;
-                var targetValue = 1f;
                 _productionFillImage.fillAmount = 0f;
-                var currentValue = _productionFillImage.fillAmount;
-                _tween = DOTween.To(() => currentValue,
-                    setter: x => _productionFillImage.fillAmount = x, targetValue, _stationSo.CraftingDuration)
+                _tween = DOTween.To(() => _productionFillImage.fillAmount,
+                    setter: x => _productionFillImage.fillAmount = x, 1f, _stationSo.CraftingDuration)
                     .OnUpdate(
                         () =>
                         {

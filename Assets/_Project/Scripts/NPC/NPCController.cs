@@ -67,7 +67,7 @@ namespace GithubGameOff2022.NPC
             }
         }
 
-        private void Leave()
+        public void Leave()
         {
             if (_fulfillmentSlot != null)
             {
