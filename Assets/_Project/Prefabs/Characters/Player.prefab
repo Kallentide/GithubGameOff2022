@@ -2005,7 +2005,6 @@ GameObject:
   m_Component:
   - component: {fileID: 713261304278184756}
   - component: {fileID: 4471730459780450818}
-  - component: {fileID: 8077284185631609051}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2044,36 +2043,6 @@ MonoBehaviour:
   m_sendNavigationEvents: 0
   m_DragThreshold: 10
   m_PlayerRoot: {fileID: 534919093150327243}
---- !u!114 &8077284185631609051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8012947258346472141}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 0
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_PointAction: {fileID: -6013996757756438525, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_MoveAction: {fileID: 2220641779796233564, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_SubmitAction: {fileID: -1488659317556213618, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_CancelAction: {fileID: -8373474007781542497, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_LeftClickAction: {fileID: 6213378265175599881, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_MiddleClickAction: {fileID: 3279352641294131588, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_RightClickAction: {fileID: -3709918215453815623, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_ScrollWheelAction: {fileID: -5459235618788812445, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: -7240846674843803350, guid: 578364306e25cb94f96158374e372b98, type: 3}
-  m_DeselectOnBackgroundClick: 0
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
 --- !u!1 &8785868018198842979
 GameObject:
   m_ObjectHideFlags: 0
