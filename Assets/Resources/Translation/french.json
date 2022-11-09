@@ -7,5 +7,11 @@
     "wrongItem" : "Tu n'as pas le bon objet pour utiliser ça !",
 
     "mugStationOk" : "Prendre chope",
-    "beerStationOk" : "Remplir chope"
+    "beerStationOk" : "Remplir chope",
+
+    "interactNPC" : "Intéragir",
+
+    "bathRoom": "Salle de bain",
+    "drinkRoom": "Bar",
+    "massageRoom": "Massage"
 }

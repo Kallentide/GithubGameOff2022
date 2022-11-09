@@ -1,5 +1,7 @@
+using GithubGameOff2022.NPC;
 using GithubGameOff2022.Prop;
 using GithubGameOff2022.SO;
+using GithubGameOff2022.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +18,9 @@ namespace GithubGameOff2022.Player
 
         [SerializeField]
         private Transform _handsTransform;
+
+        [SerializeField]
+        private RoomPanelController _roomPanel;
 
         private Hands _hands;
         public Hands Hands
@@ -75,10 +80,7 @@ namespace GithubGameOff2022.Player
 
         private void FixedUpdate()
         {
-            if (!CanMove)
-            {
-                return;
-            }
+            if (!CanMove || _roomPanel.IsOpen) return;
 
             Vector3 desiredMove = new(_mov.x, 0f, _mov.y);
 
@@ -115,21 +117,49 @@ namespace GithubGameOff2022.Player
         {
             _mov = value.ReadValue<Vector2>().normalized;
         }
+    
+        public void OnNavigate(InputAction.CallbackContext value)
+        {
+            if (!value.started) return;
+
+            if (_roomPanel.IsOpen)
+            {
+                _roomPanel.Navigate(value.ReadValue<Vector2>());
+            }
+        }
+
+        public void OnCancel(InputAction.CallbackContext value)
+        {
+            if (!value.performed) return;
+
+            if (_roomPanel.IsOpen)
+            {
+                _roomPanel.Cancel();
+            }
+        }
 
         public void OnAction(InputAction.CallbackContext value)
         {
-            if (value.performed && _interactionTarget != null)
+            if (!value.performed) return;
+
+            if (_roomPanel.IsOpen)
             {
-                if (_interactionTarget.CanInterract(this)) // Just to be sure a player didn't snipe 
+                _roomPanel.Click();
+            }
+            else if (_interactionTarget != null && _interactionTarget.CanInterract(this)) // Just to be sure a player didn't snipe
+            {
+                _interactionTarget.DoAction(this);
+                if (!_interactionTarget.CanInterract(this)) // Can we interact with the object again?
                 {
-                    _interactionTarget.DoAction(this);
-                    if (!_interactionTarget.CanInterract(this)) // Can we interact with the object again?
-                    {
-                        _interactionTarget = null;
-                        _indicatorText.text = string.Empty;
-                    }
+                    _interactionTarget = null;
+                    _indicatorText.text = string.Empty;
                 }
             }
+        }
+
+        public void OpenRoomPanel(NPCController _monster)
+        {
+            _roomPanel.OpenPanel(_monster);
         }
     }
 }

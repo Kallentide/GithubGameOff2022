@@ -1,16 +1,18 @@
 ﻿using GithubGameOff2022.Prop;
-using UnityEngine;
-using UnityEngine.AI;
+using GithubGameOff2022.Player;
 using GithubGameOff2022.SO;
+using GithubGameOff2022.Translation;
 using System.Collections.Generic;
 using System.Linq;
-using GithubGameOff2022.Player;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace GithubGameOff2022.NPC
 {
     public class NPCController : MonoBehaviour, IInteractible
     {
         [SerializeField] private Vector3 _waitPoint;
+
         public MonsterInfo MonsterSO { set; private get; }
 
         private NavMeshAgent _agent;
@@ -28,19 +30,19 @@ namespace GithubGameOff2022.NPC
         /// <summary>
         /// List of needs ordered
         /// </summary>
-        private Dictionary<Need, int> _needs;
+        public Dictionary<Need, int> Needs;
 
         /// <summary>
         /// Is the monster trying to leave the room
         /// </summary>
         public bool IsLeaving { private set; get; }
+        public bool IsInterracting { set; private get; }
 
-        private Chair _targetChair;
+        private FulfillmentSlot _fulfillmentSlot;
 
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _needs = MonsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
             _timer = 25f;
             _exitPoint = transform.position;
 
@@ -49,7 +51,8 @@ namespace GithubGameOff2022.NPC
 
         private void Start()
         {
-            _needs = MonsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
+            IsInterracting = false;
+            Needs = MonsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
         }
 
         private void Update()
@@ -66,11 +69,10 @@ namespace GithubGameOff2022.NPC
 
         private void Leave()
         {
-            if (_targetChair != null)
+            if (_fulfillmentSlot != null)
             {
-                // Free the chair
-                _targetChair.IsBusy = false;
-                _targetChair = null;
+                _fulfillmentSlot.IsFree = true;
+                _fulfillmentSlot = null;
             }
 
             IsLeaving = true;
@@ -79,29 +81,40 @@ namespace GithubGameOff2022.NPC
 
         public void SatisfyNeed(Need need, int amount)
         {
-            if (_needs.ContainsKey(need))
+            if (Needs.ContainsKey(need))
             {
-                var currValue = _needs[need] - amount;
+                var currValue = Needs[need] - amount;
                 if (currValue <= 0)
                 {
-                    _needs.Remove(need);
-                    if (!_needs.Any())
+                    Needs.Remove(need);
+                    if (!Needs.Any())
                     {
                         Leave();
                     }
                 }
                 else
                 {
-                    _needs[need] = currValue;
+                    Needs[need] = currValue;
                 }
             }
+        }
+
+        public void TryTakeFulfillmentSlot(Need need)
+        {
+            // Assign this monster to a free slot, then move to it 
+            _fulfillmentSlot = RoomManager.Instance.GetFreeSlot(need);
+            if (_fulfillmentSlot == null) return;
+            
+            _fulfillmentSlot.IsFree = false;
+            _agent.SetDestination(_fulfillmentSlot.transform.position);
         }
 
         public void DoAction(PlayerController player)
         {
             if (player.Hands == null)
             {
-                // TODO: Speak with monsters
+                IsInterracting = true;
+                player.OpenRoomPanel(this);
             }
             else
             {
@@ -112,12 +125,13 @@ namespace GithubGameOff2022.NPC
 
         public bool CanInterract(PlayerController player)
         {
-            return player.Hands == null || MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed);
+            return (!IsLeaving && !IsInterracting) && 
+                (player.Hands == null || MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed));
         }
 
         public string GetInteractionName(PlayerController player)
         {
-            return CanInterract(player) ? "TODO" : string.Empty;
+            return CanInterract(player) ? Translate.Instance.Tr("interactNPC") : string.Empty;
         }
     }
 }
