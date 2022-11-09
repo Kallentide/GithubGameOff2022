@@ -116,6 +116,24 @@ namespace GithubGameOff2022.Player
             _mov = value.ReadValue<Vector2>().normalized;
         }
 
+        public void OnThrow(InputAction.CallbackContext value)
+        {
+            if (value.performed && _hands != null)
+            {
+                _hands.Instance.transform.parent = null;
+                if (_hands.Instance.TryGetComponent<Rigidbody>(out var rb))
+                {
+                    rb.isKinematic = false;
+                    // Throw the item, should work but somehow doesn't
+                    Vector3 dir = transform.position - _rotTarget.transform.position;
+                    var target = new Vector2(dir.x, dir.z).normalized;
+                    rb.AddForce(new Vector3(target.x, .2f, target.y) * 10f, ForceMode.Impulse);
+                }
+                _hands.Instance = null;
+                _hands = null;
+            }
+        }
+
         public void OnAction(InputAction.CallbackContext value)
         {
             if (value.performed && _interactionTarget != null)

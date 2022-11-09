@@ -1,1 +1,1 @@
-[DOTween](http://dotween.demigiant.com/download.php) assets need to needto be copied here
+[DOTween](http://dotween.demigiant.com/download.php) assets need to need to be copied here

@@ -13,6 +13,11 @@ namespace GithubGameOff2022.NPC
         [SerializeField]
         private TMP_Text _text;
 
+        private void Awake()
+        {
+            _text.text = string.Empty;
+        }
+
         private void Start()
         {
             TimeManager.Instance.OnReady.AddListener(new(() =>
@@ -23,18 +28,19 @@ namespace GithubGameOff2022.NPC
 
         private IEnumerator SpawnMonsters()
         {
-            while (true)
+            while (TimeManager.Instance.DidDayStart)
             {
                 var targetMonster = _info.PossibleSpawns[Random.Range(0, _info.PossibleSpawns.Length)];
                 var go = Instantiate(targetMonster.Prefab, transform);
                 go.GetComponent<NPCController>().MonsterSO = targetMonster;
                 _text.text = $"{_info.SpawnInterval}";
-                for (var i = _info.SpawnInterval; i >= 0; i--)
+                for (var i = _info.SpawnInterval; i >= 0 && TimeManager.Instance.DidDayStart; i--)
                 {
                     yield return new WaitForSeconds(1f);
                     _text.text = $"{i}";
                 }
             }
+            _text.text = string.Empty;
         }
 
         private void OnTriggerEnter(Collider other)

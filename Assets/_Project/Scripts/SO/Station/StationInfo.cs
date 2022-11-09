@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GameOff2022.SO.Station
 {
-    [CreateAssetMenu(fileName = "Station", menuName = "ScriptableObjects/Station")]
+    [CreateAssetMenu(fileName = "Station", menuName = "ScriptableObject/Station")]
     public class StationInfo : ScriptableObject
     {
         [Tooltip("Crafting Duration (in seconds)")] [Space] public float CraftingDuration;
