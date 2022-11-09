@@ -83,7 +83,7 @@ namespace GithubGameOff2022
         /// </summary>
         public IEnumerator DisplayEndOfTheDayRecap()
         {
-            for (int i = 0; i < _recapCostContainer.childCount; i++) Destroy(_recapCostContainer.GetChild(i));
+            for (int i = 0; i < _recapCostContainer.childCount; i++) Destroy(_recapCostContainer.GetChild(i).transform.gameObject);
 
             var baseMoney = 5000f;
             SpawnCostUI("Income", baseMoney, baseMoney);
