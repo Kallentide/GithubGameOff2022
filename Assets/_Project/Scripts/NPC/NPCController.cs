@@ -81,21 +81,15 @@ namespace GithubGameOff2022.NPC
 
         public void SatisfyNeed(Need need, int amount)
         {
-            if (Needs.ContainsKey(need))
+            if (!Needs.ContainsKey(need))
             {
-                var currValue = Needs[need] - amount;
-                if (currValue <= 0)
-                {
-                    Needs.Remove(need);
-                    if (!Needs.Any())
-                    {
-                        Leave();
-                    }
-                }
-                else
-                {
-                    Needs[need] = currValue;
-                }
+                return;
+            }
+            Needs[need] = Needs[need] - amount;
+
+            if (Needs.Sum(x => x.Value) == 0)
+            {
+                Leave();
             }
         }
 
@@ -125,7 +119,7 @@ namespace GithubGameOff2022.NPC
 
         public bool CanInterract(PlayerController player)
         {
-            return (!IsLeaving && !IsInterracting) && 
+            return (!IsInterracting) && 
                 (player.Hands == null || MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed));
         }
 
