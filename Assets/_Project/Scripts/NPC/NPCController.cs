@@ -85,7 +85,7 @@ namespace GithubGameOff2022.NPC
             {
                 return;
             }
-            Needs[need] = Needs[need] - amount;
+            Needs[need] -= amount;
 
             if (Needs.Sum(x => x.Value) == 0)
             {
