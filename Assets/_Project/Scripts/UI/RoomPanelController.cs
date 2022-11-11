@@ -10,7 +10,7 @@ namespace GithubGameOff2022.UI
     {
         [SerializeField] private Animator _anim;
         private Button[] _childrenButtons;
-        private List<Button> _validButtons = new ();
+        private List<Button> _interactableButtons = new ();
         private Button _selectedButton;
         private int _selectedButtonIndex;
         [HideInInspector] public bool IsOpen;
@@ -27,16 +27,27 @@ namespace GithubGameOff2022.UI
         {
             _monster = monster;
             IsOpen = true;
+            
             foreach (Button childrenButton in _childrenButtons)
             {
-                bool validRoom = monster.Needs.ContainsKey(childrenButton.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed);
-                if (validRoom)
+                // Determines active buttons if monster need them, and wich are interactable
+                // based on their fulfillement, but let active buttons displayed
+                var buttonNeed = childrenButton.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed;
+                bool isActive = monster.Needs.ContainsKey(buttonNeed);
+                bool isInteractable = false;
+
+                if (isActive)
                 {
-                    _validButtons.Add(childrenButton);
+                    isInteractable = monster.Needs[buttonNeed] > 0;
+                    if (isInteractable)
+                    {
+                        _interactableButtons.Add(childrenButton);
+                    }
                 }
-                childrenButton.gameObject.SetActive(validRoom);
+                childrenButton.gameObject.SetActive(isActive);
+                childrenButton.interactable = isInteractable;
             }
-            var selected = _validButtons[_selectedButtonIndex];
+            var selected = _interactableButtons[_selectedButtonIndex];
             selected.Select();
             _selectedButton = selected;
             _anim.SetBool("OpenRoomWheel", true);
@@ -47,7 +58,7 @@ namespace GithubGameOff2022.UI
             _anim.SetBool("OpenRoomWheel", false);
             IsOpen = false;
             _selectedButtonIndex = 0;
-            _validButtons = new List<Button>();
+            _interactableButtons = new List<Button>();
             _monster.IsInterracting = false;
             _monster = null;
         }
@@ -57,14 +68,14 @@ namespace GithubGameOff2022.UI
             if (dir.y == 1f) // up
             {
                 _selectedButtonIndex--;
-                if (_selectedButtonIndex == -1) _selectedButtonIndex = _validButtons.Count - 1;
+                if (_selectedButtonIndex == -1) _selectedButtonIndex = _interactableButtons.Count - 1;
             }
             else if (dir.y == -1f) // down
             {
                 _selectedButtonIndex++;
-                if (_selectedButtonIndex == _validButtons.Count) _selectedButtonIndex = 0;
+                if (_selectedButtonIndex == _interactableButtons.Count) _selectedButtonIndex = 0;
             }
-            var btn = _validButtons.ElementAt(_selectedButtonIndex);
+            var btn = _interactableButtons.ElementAt(_selectedButtonIndex);
             _selectedButton = btn;
             btn.Select();
         }
@@ -81,14 +92,6 @@ namespace GithubGameOff2022.UI
                 _monster.TryTakeFulfillmentSlot(_selectedButton.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed);
             }
             ClosePanel();
-        }
-
-        private void DisableChildrenButtons()
-        {
-            foreach (Button childrenButton in _childrenButtons)
-            {
-                childrenButton.gameObject.SetActive(false);
-            }
         }
     }
 }
