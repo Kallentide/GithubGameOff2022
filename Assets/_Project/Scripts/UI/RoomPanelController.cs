@@ -9,18 +9,26 @@ namespace GithubGameOff2022.UI
     public class RoomPanelController : MonoBehaviour
     {
         [SerializeField] private Animator _anim;
-        private Button[] _childrenButtons;
-        private List<Button> _interactableButtons = new ();
-        private Button _selectedButton;
+        private Image[] _childrenButtons;
+        private List<Image> _interactableButtons = new ();
+        private Image _selectedButton;
         private int _selectedButtonIndex;
         [HideInInspector] public bool IsOpen;
         private NPCController _monster;
+
+        private Color _baseColor, _selectedColor;
 
         void Start()
         {
             IsOpen = false;
             _selectedButtonIndex = 0;
-            _childrenButtons = GetComponentsInChildren<Button>();
+            _childrenButtons = new Image[transform.childCount];
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                _childrenButtons[i] = transform.GetChild(i).GetComponent<Image>();
+            }
+            _baseColor = _childrenButtons[0].color;
+            _selectedColor = new Color(_baseColor.r + .2f, _baseColor.g + .2f, _baseColor.b + .2f);
         }
 
         public void OpenPanel(NPCController monster)
@@ -28,11 +36,11 @@ namespace GithubGameOff2022.UI
             _monster = monster;
             IsOpen = true;
             
-            foreach (Button childrenButton in _childrenButtons)
+            foreach (var child in _childrenButtons)
             {
                 // Determines active buttons if monster need them, and wich are interactable
                 // based on their fulfillement, but let active buttons displayed
-                var buttonNeed = childrenButton.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed;
+                var buttonNeed = child.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed;
                 bool isActive = monster.Needs.ContainsKey(buttonNeed);
                 bool isInteractable = false;
 
@@ -41,15 +49,14 @@ namespace GithubGameOff2022.UI
                     isInteractable = monster.Needs[buttonNeed] > 0;
                     if (isInteractable)
                     {
-                        _interactableButtons.Add(childrenButton);
+                        _interactableButtons.Add(child);
                     }
                 }
-                childrenButton.gameObject.SetActive(isActive);
-                childrenButton.interactable = isInteractable;
+                child.gameObject.SetActive(isActive);
+                child.color = isInteractable ? _baseColor : Color.gray;
             }
             var selected = _interactableButtons[_selectedButtonIndex];
-            selected.Select();
-            _selectedButton = selected;
+            Select(selected);
             _anim.SetBool("OpenRoomWheel", true);
         }
 
@@ -58,7 +65,7 @@ namespace GithubGameOff2022.UI
             _anim.SetBool("OpenRoomWheel", false);
             IsOpen = false;
             _selectedButtonIndex = 0;
-            _interactableButtons = new List<Button>();
+            _interactableButtons = new();
             _monster.IsInterracting = false;
             _monster = null;
         }
@@ -76,8 +83,16 @@ namespace GithubGameOff2022.UI
                 if (_selectedButtonIndex == _interactableButtons.Count) _selectedButtonIndex = 0;
             }
             var btn = _interactableButtons.ElementAt(_selectedButtonIndex);
-            _selectedButton = btn;
-            btn.Select();
+            Select(btn);
+        }
+
+        private void Select(Image img)
+        {
+            if (_selectedButton != null)
+            {
+                _selectedButton.color = _baseColor;
+            }
+            _selectedButton = img;
         }
 
         public void Cancel()
