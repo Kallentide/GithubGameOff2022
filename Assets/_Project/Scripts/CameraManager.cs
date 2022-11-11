@@ -14,10 +14,13 @@ namespace GithubGameOff2022
             Instance = this;
         }
 
+        private GameObject[] _players;
+
         public void EnableOfficeView()
         {
             _officeCamera.gameObject.SetActive(true);
-            foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
+            _players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var p in _players)
             {
                 p.gameObject.SetActive(false);
             }
@@ -26,7 +29,7 @@ namespace GithubGameOff2022
         public void EnableGameView()
         {
             _officeCamera.gameObject.SetActive(false);
-            foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
+            foreach (var p in _players)
             {
                 p.gameObject.SetActive(true);
             }

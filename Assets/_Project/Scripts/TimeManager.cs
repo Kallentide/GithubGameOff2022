@@ -37,6 +37,8 @@ namespace GithubGameOff2022
 
         public bool DidDayStart { private set; get; }
 
+        private GameObject _playerInputManager;
+
         private void Awake()
         {
             Instance = this;
@@ -52,6 +54,7 @@ namespace GithubGameOff2022
                         () =>
                         {}).OnComplete(() =>
                         {
+                            _playerInputManager.gameObject.SetActive(false);
                             _dayProgress.gameObject.SetActive(false);
                             DidDayStart = false;
                             ResetReady();
@@ -59,6 +62,11 @@ namespace GithubGameOff2022
                         }).SetUpdate(true);
             }));
             UpdateReadyText();
+        }
+
+        private void Start()
+        {
+            _playerInputManager = PlayerInputManager.instance.gameObject;
         }
 
         private float SpawnCostUI(string title, float cost, float currentMoney)
@@ -97,6 +105,7 @@ namespace GithubGameOff2022
             yield return new WaitForSeconds(5f);
             CameraManager.Instance.EnableGameView();
             _readyText.gameObject.SetActive(true);
+            _playerInputManager.gameObject.SetActive(true);
         }
 
         public void ResetReady() // TODO: Keep objects in list instead of searching them on scene everytimes
