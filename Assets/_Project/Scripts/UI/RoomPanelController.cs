@@ -93,6 +93,7 @@ namespace GithubGameOff2022.UI
                 _selectedButton.color = _baseColor;
             }
             _selectedButton = img;
+            _selectedButton.color = _selectedColor;
         }
 
         public void Cancel()
