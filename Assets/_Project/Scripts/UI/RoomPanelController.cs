@@ -41,12 +41,12 @@ namespace GithubGameOff2022.UI
                 // Determines active buttons if monster need them, and wich are interactable
                 // based on their fulfillement, but let active buttons displayed
                 var buttonNeed = child.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed;
-                bool isActive = monster.Needs.ContainsKey(buttonNeed);
+                bool isActive = buttonNeed == Need.None || monster.Needs.ContainsKey(buttonNeed);
                 bool isInteractable = false;
 
                 if (isActive)
                 {
-                    isInteractable = monster.Needs[buttonNeed] > 0;
+                    isInteractable = buttonNeed == Need.None || monster.Needs[buttonNeed] > 0;
                     if (isInteractable)
                     {
                         _interactableButtons.Add(child);
@@ -103,9 +103,10 @@ namespace GithubGameOff2022.UI
 
         public void Click()
         {
-            if (!_monster.IsLeaving)
+            var targetNeed = _selectedButton.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed;
+            if (targetNeed != Need.None && !_monster.IsLeaving)
             {
-                _monster.TryTakeFulfillmentSlot(_selectedButton.gameObject.GetComponent<RoomPanelButtonController>().RoomNeed);
+                _monster.TryTakeFulfillmentSlot(targetNeed);
             }
             ClosePanel();
         }

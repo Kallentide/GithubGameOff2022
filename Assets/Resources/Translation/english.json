@@ -13,5 +13,7 @@
 
     "bathRoom": "Bathroom",
     "drinkRoom": "Bar",
-    "massageRoom": "Massage"
+    "massageRoom": "Massage",
+
+    "cancel" : "Cancel"
 }
