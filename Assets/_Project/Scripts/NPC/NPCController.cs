@@ -119,7 +119,7 @@ namespace GithubGameOff2022.NPC
 
         public bool CanInterract(PlayerController player)
         {
-            return (!IsInterracting) && 
+            return (!IsLeaving && !IsInterracting) && 
                 (player.Hands == null || MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed));
         }
 
