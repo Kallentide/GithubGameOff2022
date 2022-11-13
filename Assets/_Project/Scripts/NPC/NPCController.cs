@@ -36,7 +36,7 @@ namespace GithubGameOff2022.NPC
         /// Is the monster trying to leave the room
         /// </summary>
         public bool IsLeaving { private set; get; }
-        public bool IsInterractingPlayer { set; private get; }
+        public bool IsPlayerInterracting { set; private get; }
 
         private FulfillmentSlot _fulfillmentSlot;
 
@@ -51,7 +51,7 @@ namespace GithubGameOff2022.NPC
 
         private void Start()
         {
-            IsInterractingPlayer = false;
+            IsPlayerInterracting = false;
             Needs = MonsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
         }
 
@@ -108,7 +108,7 @@ namespace GithubGameOff2022.NPC
             if (_fulfillmentSlot == null) 
             {
                 player.OpenRoomPanel(this);
-                IsInterractingPlayer = true;
+                IsPlayerInterracting = true;
             }
             else
             {
@@ -119,10 +119,10 @@ namespace GithubGameOff2022.NPC
 
         public bool CanInterract(PlayerController player)
         {
-            return !IsLeaving && !IsInterractingPlayer && 
+            return !IsLeaving && !IsPlayerInterracting && 
                 (
                     _fulfillmentSlot == null ||
-                    _fulfillmentSlot != null && player.Hands != null && MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed)
+                    player.Hands != null && MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed)
                 );
         }
 
