@@ -59,7 +59,7 @@ namespace GithubGameOff2022.UI
             IsOpen = false;
             _selectedButtonIndex = 0;
             _interactableButtons = new List<Button>();
-            _monster.IsInterracting = false;
+            _monster.IsInterractingPlayer = false;
             _monster = null;
         }
 

@@ -36,7 +36,7 @@ namespace GithubGameOff2022.NPC
         /// Is the monster trying to leave the room
         /// </summary>
         public bool IsLeaving { private set; get; }
-        public bool IsInterracting { set; private get; }
+        public bool IsInterractingPlayer { set; private get; }
 
         private FulfillmentSlot _fulfillmentSlot;
 
@@ -51,7 +51,7 @@ namespace GithubGameOff2022.NPC
 
         private void Start()
         {
-            IsInterracting = false;
+            IsInterractingPlayer = false;
             Needs = MonsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
         }
 
@@ -62,12 +62,12 @@ namespace GithubGameOff2022.NPC
                 _timer -= Time.deltaTime;
                 if (_timer <= 0f)
                 {
-                    Leave();
+                    FreeSlotAndLeave();
                 }
             }
         }
 
-        public void Leave()
+        public void FreeSlotAndLeave()
         {
             if (_fulfillmentSlot != null)
             {
@@ -89,7 +89,7 @@ namespace GithubGameOff2022.NPC
 
             if (Needs.Sum(x => x.Value) == 0)
             {
-                Leave();
+                FreeSlotAndLeave();
             }
         }
 
@@ -105,10 +105,10 @@ namespace GithubGameOff2022.NPC
 
         public void DoAction(PlayerController player)
         {
-            if (player.Hands == null)
+            if (_fulfillmentSlot == null) 
             {
-                IsInterracting = true;
                 player.OpenRoomPanel(this);
+                IsInterractingPlayer = true;
             }
             else
             {
@@ -119,8 +119,11 @@ namespace GithubGameOff2022.NPC
 
         public bool CanInterract(PlayerController player)
         {
-            return (!IsLeaving && !IsInterracting) && 
-                (player.Hands == null || MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed));
+            return !IsLeaving && !IsInterractingPlayer && 
+                (
+                    _fulfillmentSlot == null ||
+                    _fulfillmentSlot != null && player.Hands != null && MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed)
+                );
         }
 
         public string GetInteractionName(PlayerController player)
