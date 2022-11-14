@@ -1,9 +1,19 @@
 fileFormatVersion: 2
 guid: 2abe407e50a467b44b8e290cd92fe333
 ModelImporter:
-  serializedVersion: 22103
+  serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_DecorativeBowl_Green
+    second: {fileID: 2100000, guid: bd6fffdf086af1946917fbf117b501a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_DecorativeBowl_Yellow
+    second: {fileID: 2100000, guid: e06f61294756fb448b515228785087b6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -67,7 +77,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -100,7 +109,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
