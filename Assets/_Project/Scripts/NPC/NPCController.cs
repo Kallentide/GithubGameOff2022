@@ -105,7 +105,7 @@ namespace GithubGameOff2022.NPC
 
         public void DoAction(PlayerController player)
         {
-            if (_fulfillmentSlot == null) 
+            if (_fulfillmentSlot == null)
             {
                 player.OpenRoomPanel(this);
                 IsPlayerInterracting = true;
