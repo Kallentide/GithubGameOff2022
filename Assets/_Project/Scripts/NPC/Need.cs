@@ -5,7 +5,10 @@
         None,
 
         Bath,
+        Drink,
+        Grooming,
+        Laundry,
         Massage,
-        Drink
+        Medic,
     }
 }
