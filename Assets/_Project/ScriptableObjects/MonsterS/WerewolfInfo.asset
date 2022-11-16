@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WerewolfInfo
   m_EditorClassIdentifier: 
   DisplayedName: Werewolf
-  Prefab: {fileID: 1095851923358415490, guid: 8868e12584ef987469c2434fc4b40a66, type: 3}
+  Prefab: {fileID: 4728595860954615639, guid: 5196aac468dbf2141a63c81d1d1c4b8f, type: 3}
   Needs: 0100000003000000

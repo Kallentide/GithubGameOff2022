@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace GithubGameOff2022.NPC
 {
     public class NPCController : MonoBehaviour, IInteractible
     {
         [SerializeField] private Vector3 _waitPoint;
+        [SerializeField] private Image _timeProgressBar;
 
         public MonsterInfo MonsterSO { set; private get; }
 
@@ -25,7 +27,8 @@ namespace GithubGameOff2022.NPC
         /// <summary>
         /// Time left for the monster before he has to leave
         /// </summary>
-        private float _timer;
+        private float _timeLeft;
+        private float _initialTimeLeft;
 
         /// <summary>
         /// List of needs ordered
@@ -43,7 +46,8 @@ namespace GithubGameOff2022.NPC
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _timer = 25f;
+            _initialTimeLeft = 25f;
+            _timeLeft = _initialTimeLeft;
             _exitPoint = transform.position;
 
             _agent.SetDestination(_waitPoint);
@@ -59,11 +63,13 @@ namespace GithubGameOff2022.NPC
         {
             if (!IsLeaving)
             {
-                _timer -= Time.deltaTime;
-                if (_timer <= 0f)
+                _timeLeft -= Time.deltaTime;
+                if (_timeLeft <= 0f)
                 {
                     Leave();
                 }
+                // update time left progress bar
+                _timeProgressBar.fillAmount = 1 - (_timeLeft / _initialTimeLeft);
             }
         }
 
