@@ -95,6 +95,7 @@ namespace GithubGameOff2022.NPC
 
         public void TryTakeFulfillmentSlot(Need need)
         {
+            // TODO: wait the monster reach the slot before authorizing to satisfy need
             // Assign this monster to a free slot, then move to it 
             _fulfillmentSlot = RoomManager.Instance.GetFreeSlot(need);
             if (_fulfillmentSlot == null) return;

@@ -20,6 +20,10 @@ namespace GithubGameOff2022.Prop
 
         private readonly List<FulfillmentSlot> _bathSlots = new();
         private readonly List<FulfillmentSlot> _drinkSlots = new();
+        private readonly List<FulfillmentSlot> _groomingSlots = new();
+        private readonly List<FulfillmentSlot> _laundrySlots = new();
+        private readonly List<FulfillmentSlot> _massageSlots = new();
+        private readonly List<FulfillmentSlot> _medicSlots = new();
 
         public void RegisterSlot(FulfillmentSlot slot, Need need)
         {
@@ -45,6 +49,14 @@ namespace GithubGameOff2022.Prop
                     return _bathSlots;
                 case Need.Drink:
                     return _drinkSlots;
+                case Need.Grooming:
+                    return _groomingSlots;
+                case Need.Laundry:
+                    return _laundrySlots;
+                case Need.Massage:
+                    return _massageSlots;
+                case Need.Medic:
+                    return _medicSlots;
                 default:
                     Debug.LogWarning("Invalid need given");
                     return new List<FulfillmentSlot>();
