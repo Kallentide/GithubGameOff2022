@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using GithubGameOff2022.Prop.NeedSlot;
 
 namespace GithubGameOff2022.NPC
 {
@@ -38,7 +39,7 @@ namespace GithubGameOff2022.NPC
         public bool IsLeaving { private set; get; }
         public bool IsInterracting { set; private get; }
 
-        private FulfillmentSlot _fulfillmentSlot;
+        private AFulfillmentSlot _fulfillmentSlot;
 
         private void Awake()
         {

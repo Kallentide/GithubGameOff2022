@@ -1,4 +1,5 @@
 ﻿using GithubGameOff2022.NPC;
+using GithubGameOff2022.Prop.NeedSlot;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,15 +19,18 @@ namespace GithubGameOff2022.Prop
             Instance = this;
         }
 
-        private readonly List<FulfillmentSlot> _bathSlots = new();
-        private readonly List<FulfillmentSlot> _drinkSlots = new();
+        private readonly Dictionary<Need, List<AFulfillmentSlot>> _slots = new();
 
-        public void RegisterSlot(FulfillmentSlot slot, Need need)
+        public void RegisterSlot(AFulfillmentSlot slot, Need need)
         {
-            GetNeedSlots(need).Add(slot);
+            if (!_slots.ContainsKey(need))
+            {
+                _slots.Add(need, new());
+            }
+            _slots[need].Add(slot);
         }
 
-        public FulfillmentSlot GetFreeSlot(Need need)
+        public AFulfillmentSlot GetFreeSlot(Need need)
         {
             var freeSlots = GetNeedSlots(need).Where(x => x.IsFree).ToArray();
             if (!freeSlots.Any())
@@ -36,19 +40,10 @@ namespace GithubGameOff2022.Prop
             return freeSlots[Random.Range(0, freeSlots.Length)];
         }
 
-        private List<FulfillmentSlot> GetNeedSlots(Need need)
+        private IEnumerable<AFulfillmentSlot> GetNeedSlots(Need need)
         {
             // Associate a need with a list of slots
-            switch (need)
-            {
-                case Need.Bath:
-                    return _bathSlots;
-                case Need.Drink:
-                    return _drinkSlots;
-                default:
-                    Debug.LogWarning("Invalid need given");
-                    return new List<FulfillmentSlot>();
-            }
+            return _slots.FirstOrDefault(x => x.Key == need).Value;
         }
     }
 }
