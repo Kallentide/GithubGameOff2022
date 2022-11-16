@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: OrcInfo
   m_EditorClassIdentifier: 
   DisplayedName: Orc
-  Prefab: {fileID: 1095851923358415490, guid: 7800fc62483c1184c8aebfacdc382857, type: 3}
+  Prefab: {fileID: 4361540271056168483, guid: 4302132dfeafd7146989db3d7c7d8e0d, type: 3}
   Needs: 03000000

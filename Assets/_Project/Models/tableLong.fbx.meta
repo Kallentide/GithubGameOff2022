@@ -1,9 +1,24 @@
 fileFormatVersion: 2
 guid: b7ce8a9548338464f83414db7ac140c0
 ModelImporter:
-  serializedVersion: 22103
+  serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_LongTable_Brown
+    second: {fileID: 2100000, guid: 9020f5e7cea541a408b8f58f050b789e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_LongTable_Brown2
+    second: {fileID: 2100000, guid: 2a18822174a6a094cb6dde757faca3fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_LongTable_Silver
+    second: {fileID: 2100000, guid: 0ef30ed04246e134687c7cea33ed55b6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -67,7 +82,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -100,7 +114,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

@@ -1,9 +1,64 @@
 fileFormatVersion: 2
 guid: 138c9cd6c9aeea3468920d8489c8f28b
 ModelImporter:
-  serializedVersion: 22103
+  serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLinePin_Grey
+    second: {fileID: 2100000, guid: 09e4076d60333cd4a976ba915ac31259, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLinePin_Tan
+    second: {fileID: 2100000, guid: 103935dae0af2fa409d5580dcf0bb157, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLine_Brown
+    second: {fileID: 2100000, guid: c09abd17add6f5d49b4c4ea05a855cbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLine_Brown2
+    second: {fileID: 2100000, guid: 0eb6b6069153a4a41a802d726030d24c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLine_Purple
+    second: {fileID: 2100000, guid: 26e0b8bf19d30334ead07631bbb93ce0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLine_Tan
+    second: {fileID: 2100000, guid: 3d660d9566c31474a8aebe306ec4a569, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLine_UglyGreen
+    second: {fileID: 2100000, guid: a4d1b9a42acd40d48b5a5e4c5b1ec501, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothesLine_White
+    second: {fileID: 2100000, guid: 7c198bbdc9728394a8c75b7fa78d691e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_PileOfDirtyLaundry_Red
+    second: {fileID: 2100000, guid: 6c8ae86c19c80504ba7f44ad5ebae2a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_SackOutfit_Yellow
+    second: {fileID: 2100000, guid: f1c54e3d89ef17d45abc8a49153eb3e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Towel_Yellow
+    second: {fileID: 2100000, guid: 3e7403e2ec109ed4d8894238aec23884, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -67,7 +122,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -100,7 +154,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

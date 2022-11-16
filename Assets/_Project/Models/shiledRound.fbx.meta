@@ -1,9 +1,24 @@
 fileFormatVersion: 2
 guid: 807b36c5ee280bb4e8abc63f530d591b
 ModelImporter:
-  serializedVersion: 22103
+  serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ShieldRound_Black
+    second: {fileID: 2100000, guid: 4c25cddb46b2d9f4f94db10625d36d8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ShieldRound_Green
+    second: {fileID: 2100000, guid: 04267c706aff7664d8f289f5b9e85b47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ShieldRound_White
+    second: {fileID: 2100000, guid: 91a50f5a246d18f49a7fec3ce5235f62, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -67,7 +82,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -100,7 +114,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3027254347870937327}
   - component: {fileID: -4589425002300632313}
   m_Layer: 0
-  m_Name: TankardEmpty
+  m_Name: tankardEmpty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

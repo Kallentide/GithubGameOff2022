@@ -7,12 +7,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using GithubGameOff2022.Prop.NeedSlot;
+using UnityEngine.UI;
 
 namespace GithubGameOff2022.NPC
 {
     public class NPCController : MonoBehaviour, IInteractible
     {
         [SerializeField] private Vector3 _waitPoint;
+        [SerializeField] private Image _timeProgressBar;
 
         public MonsterInfo MonsterSO { set; private get; }
 
@@ -26,7 +28,8 @@ namespace GithubGameOff2022.NPC
         /// <summary>
         /// Time left for the monster before he has to leave
         /// </summary>
-        private float _timer;
+        private float _timeLeft;
+        private float _initialTimeLeft;
 
         /// <summary>
         /// List of needs ordered
@@ -37,14 +40,15 @@ namespace GithubGameOff2022.NPC
         /// Is the monster trying to leave the room
         /// </summary>
         public bool IsLeaving { private set; get; }
-        public bool IsInterracting { set; private get; }
+        public bool IsPlayerInterracting { set; private get; }
 
         private AFulfillmentSlot _fulfillmentSlot;
 
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _timer = 25f;
+            _initialTimeLeft = 25f;
+            _timeLeft = _initialTimeLeft;
             _exitPoint = transform.position;
 
             _agent.SetDestination(_waitPoint);
@@ -52,7 +56,7 @@ namespace GithubGameOff2022.NPC
 
         private void Start()
         {
-            IsInterracting = false;
+            IsPlayerInterracting = false;
             Needs = MonsterSO.Needs.ToDictionary(x => x, _ => Random.Range(30, 70));
         }
 
@@ -60,15 +64,17 @@ namespace GithubGameOff2022.NPC
         {
             if (!IsLeaving)
             {
-                _timer -= Time.deltaTime;
-                if (_timer <= 0f)
+                _timeLeft -= Time.deltaTime;
+                if (_timeLeft <= 0f)
                 {
-                    Leave();
+                    FreeSlotAndLeave();
                 }
+                // update time left progress bar
+                _timeProgressBar.fillAmount = 1 - (_timeLeft / _initialTimeLeft);
             }
         }
 
-        public void Leave()
+        public void FreeSlotAndLeave()
         {
             if (_fulfillmentSlot != null)
             {
@@ -90,12 +96,13 @@ namespace GithubGameOff2022.NPC
 
             if (Needs.Sum(x => x.Value) == 0)
             {
-                Leave();
+                FreeSlotAndLeave();
             }
         }
 
         public void TryTakeFulfillmentSlot(Need need)
         {
+            // TODO: wait the monster reach the slot before authorizing to satisfy need
             // Assign this monster to a free slot, then move to it 
             _fulfillmentSlot = RoomManager.Instance.GetFreeSlot(need);
             if (_fulfillmentSlot == null) return;
@@ -106,10 +113,10 @@ namespace GithubGameOff2022.NPC
 
         public void DoAction(PlayerController player)
         {
-            if (player.Hands == null)
+            if (_fulfillmentSlot == null)
             {
-                IsInterracting = true;
                 player.OpenRoomPanel(this);
+                IsPlayerInterracting = true;
             }
             else
             {
@@ -120,8 +127,11 @@ namespace GithubGameOff2022.NPC
 
         public bool CanInterract(PlayerController player)
         {
-            return (!IsInterracting) && 
-                (player.Hands == null || MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed));
+            return !IsLeaving && !IsPlayerInterracting && 
+                (
+                    _fulfillmentSlot == null ||
+                    player.Hands != null && MonsterSO.Needs.Contains(player.Hands.Item.TargetNeed)
+                );
         }
 
         public string GetInteractionName(PlayerController player)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7608061781763629667}
   - component: {fileID: 933054086657740594}
   m_Layer: 0
-  m_Name: TankardFull
+  m_Name: tankardFull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

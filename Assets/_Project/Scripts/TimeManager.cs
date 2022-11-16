@@ -112,7 +112,7 @@ namespace GithubGameOff2022
         {
             foreach (var m in GameObject.FindGameObjectsWithTag("Monster"))
             {
-                m.GetComponent<NPCController>().Leave();
+                m.GetComponent<NPCController>().FreeSlotAndLeave();
             }
             foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
             {
