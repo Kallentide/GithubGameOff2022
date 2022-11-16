@@ -741,7 +741,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: medicalTable
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4443169160175893232, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
 --- !u!1001 &74595152
 PrefabInstance:
@@ -2959,7 +2960,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: medicalTable
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4443169160175893232, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
 --- !u!1001 &246956709
 PrefabInstance:
@@ -4393,7 +4395,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29622
+  m_Name: pb_Mesh29836
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9361,7 +9363,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29322
+  m_Name: pb_Mesh29458
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9839,6 +9841,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7cc702b4af8d41479234b61f9b78307, type: 3}
+--- !u!1 &840402529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 766676404037823108, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
+  m_PrefabInstance: {fileID: 70908236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &841034706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11836,7 +11843,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28832
+  m_Name: pb_Mesh28872
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13012,7 +13019,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: medicalTable
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4443169160175893232, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
 --- !u!1001 &1172165863
 PrefabInstance:
@@ -15705,13 +15713,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 137386779197665342, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
   m_PrefabInstance: {fileID: 70908236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1449475308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840402529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9386e12a9b80504e8199a87a40b9b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _need: 6
 --- !u!43 &1453671156
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29010
+  m_Name: pb_Mesh29100
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16407,6 +16428,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6617180386607401577, guid: dd947837a9cafad43a5a31799e1446e7, type: 3}
   m_PrefabInstance: {fileID: 1473261737}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1473293239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 766676404037823108, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
+  m_PrefabInstance: {fileID: 1169780995}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1473362880 stripped
 Transform:
@@ -17798,6 +17824,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 137386779197665342, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
   m_PrefabInstance: {fileID: 1169780995}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1571780305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473293239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9386e12a9b80504e8199a87a40b9b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _need: 6
 --- !u!4 &1573640995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 137386779197665342, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
@@ -17858,6 +17897,24 @@ Transform:
   m_Father: {fileID: 275964893}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1583858147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 766676404037823108, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
+  m_PrefabInstance: {fileID: 245101176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1583858152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583858147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9386e12a9b80504e8199a87a40b9b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _need: 6
 --- !u!1001 &1612835731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19867,6 +19924,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3219802011028872903, guid: 4c72dbbb036f4554e814558980bc01b0, type: 3}
   m_PrefabInstance: {fileID: 1827112736}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1835019783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 766676404037823108, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
+  m_PrefabInstance: {fileID: 1991138828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1835019788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835019783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9386e12a9b80504e8199a87a40b9b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _need: 6
 --- !u!4 &1837672190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4749429989073517558, guid: a7cc702b4af8d41479234b61f9b78307, type: 3}
@@ -21633,7 +21708,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: medicalTable
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4443169160175893232, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 48b34db6a80c86a4495249ff5db68a35, type: 3}
 --- !u!4 &1997620032 stripped
 Transform:
