@@ -13,7 +13,10 @@
 
     "bathRoom": "Bathroom",
     "drinkRoom": "Bar",
+    "groomingRoom": "Grooming",
+    "laundryRoom": "Laundry",
     "massageRoom": "Massage",
+    "medicRoom": "Infirmary",
 
     "cancel" : "Cancel"
 }

@@ -13,7 +13,10 @@
 
     "bathRoom": "Salle de bain",
     "drinkRoom": "Bar",
+    "groomingRoom": "Toilettage",
+    "laundryRoom": "Laverie",
     "massageRoom": "Massage",
+    "medicRoom": "Infirmerie",
 
     "cancel" : "Annuler"
 }
